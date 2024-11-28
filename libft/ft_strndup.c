@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bonus_fun.c                                     :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmartini <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 15:52:12 by fmartini          #+#    #+#             */
-/*   Updated: 2023/09/12 16:59:52 by fmartini         ###   ########.fr       */
+/*   Created: 2024/11/20 10:02:48 by francema          #+#    #+#             */
+/*   Updated: 2024/11/20 10:04:12 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"ft_printf.h"
+#include "libft.h"
 
-int ft_atoi_flag(char *str, int n)
+char	*ft_strndup(const char *s, size_t n)
 {
-    int n_ci;
-    int n_0;
+	char	*str;
+	size_t	i;
 
-    n_ci = 0;
-    while(n >= 10)
-    {
-        n /=10;
-        n_ci++;
-        n_0 = ft_atoi(str) - n_ci;
-    }
+	if (!str)
+		return (NULL);
+	i = 0;
+	str = malloc(sizeof(char) * (n + 1));
+	while (s[i] && i < n)
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
