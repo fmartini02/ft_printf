@@ -58,7 +58,7 @@ void	ft_itoa_utils(int n, char *res, int flag)
 	}
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long long int n)
 {
 	char	*res;
 	int		flag;

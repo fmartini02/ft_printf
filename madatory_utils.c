@@ -42,7 +42,7 @@ void	lputunsigned(t_info *info)
 	free(s);
 }
 
-void	lputexa(t_info *info, char c)
+void	lputexa(t_info *info, char c, )
 {
 	char			*base;
 	char			*buf;

@@ -1,2 +1,4 @@
 libftprintf.a
 exe
+test.c
+a.out

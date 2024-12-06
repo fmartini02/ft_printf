@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:39:25 by francema          #+#    #+#             */
-/*   Updated: 2024/11/27 16:56:27 by francema         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:44:30 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,19 @@ void	lputnbr(t_info *info, int n)
 	}
 	if (nb < 10)
 		lputchar(nb + 48, pb);
+}
+
+int	ft_skip_num(char *s, int i)
+{
+	while (s[i] >= '0' && s[i] <= '9')
+		i++;
+	return (i);
+}
+
+void	init_info(t_info *info, char *str, va_list *args)
+{
+	info->s = str;
+	info->p_b = 0;
+	info->i = 0;
+	info->args = args;
 }

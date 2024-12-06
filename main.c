@@ -6,42 +6,27 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/11/28 16:00:20 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:48:27 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	init_flags(char c, t_flags *flags)
-{
-	if (c == '#')
-		flags->sharp += 1;
-	else if (c == '-')
-		flags->neg += 1;
-	else if (c == '+')
-		flags->pos += 1;
-	else if (c == '.')
-		flags->dot += 1;
-	else if (c == ' ')
-		flags->space += 1;
-	else if (c == '0')
-		flags->zero += 1;
-}
-
-int	check_stdflags(char c)
-{
-	if (c != 's' && c != 'd' && c != 'u'
-		&& c != 'x' && c != 'X' && c != 'p'
-		&& c != 'c' && c != 'i' && c != '%')
-		return (1);
-	else
-		return (0);
-}
-
-void	handle_specflag(t_flags *flags, t_info *info)
+void	*handle_specflag(t_flags *flags, t_info *info)
 {
 	char	*s;
+	char	c;
 
+	s = info->s;
+	c = s[info->i + 1];//bcs stop before the std flags
+	if (flags->zero && !flags->sharp && flags->num && !flags->dot)
+		handle_zero(flags, info, c);
+	if (flags->space && !flags->pos)
+		handle_space(flags, info, c);
+	if (flags->sharp && (c == 'x' || c == 'X'))
+		handle_sharp(flags, info, c);
+	if (flags->dot)
+		handle_dot(flags, info, c);
 }
 
 void	*spec_flag(t_info *info)
@@ -56,7 +41,7 @@ void	*spec_flag(t_info *info)
 	s = info->s;
 	i = info->i;
 	while(check_stdflags(s[i]))
-		init_flags(s[i++], flags);
+		init_flags(s[i++], flags, info);
 	handle_specflags(flags, info);
 }
 
@@ -85,14 +70,6 @@ void	expand_flags(t_info *info)
 		lputchar('%', &(info->p_b));
 }
 
-void	init_info(t_info *info, char *str, va_list *args)
-{
-	info->s = str;
-	info->p_b = 0;
-	info->i = 0;
-	info->args = args;
-}
-
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
@@ -117,6 +94,7 @@ int	ft_printf(const char *str, ...)
 	}
 	p_b = info->p_b;
 	free(info);
+	va_end(args);
 	return (p_b);
 }
 
