@@ -1,77 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_spec.c                                      :+:      :+:    :+:   */
+/*   handle_spec_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:49:44 by francema          #+#    #+#             */
-/*   Updated: 2024/12/03 18:04:53 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:15:24 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-void	*handle_zero(t_flags *flags, t_info *info, char c)
+void	handle_zero(t_flags *flags, t_info *info, char c)
 {
-	char	*ret;
-	int		len;
-
-	len = find_len(flags, info, c);
-	ret = malloc(sizeof(char) * (len + 1));
-	if (!ret)
-		return (NULL);
 	if (c == 'c')
-		ret = char_case(flags, info, ret);
+		char_case(flags, info);
 	else if (c == 's')
-		ret = str_case(flags, info, ret);
+		str_case(flags, info);
 	else if (c == 'd' || c == 'i')
-		ret = int_case(flags, info, ret);
+		int_case(flags, info);
 	else if (c == 'u')
-		ret = uns_case(flags, info, ret);
-	lputstr(ret, &(info->p_b));
+		uns_case(flags, info);
 }
 
-void	*handle_space(t_flags *flags, t_info *info, char c)
+void	handle_sharp(t_info *info, char c)
 {
-	char	*ret;
-	int		len;
-
-	len = find_len(flags, info, c);
-	ret = malloc(sizeof(char) * (len + 1));
-	if (!ret)
-		return (NULL);
-	if (c == 'i' || c == 'd')
-	{
-		set_ret(flags, info, ret, c);
-		lputchar(' ', &(info->p_b));
-	}
-	else
-		set_ret(flags, info, ret, c);
-}
-
-void	handle_sharp(t_flags *flags, t_info *info, char c)
-{
+	lputstr("0x", &(info->p_b));
 	if (c == 'X')
-	{
-		lputstr("0X", &(info->p_b));
 		lputexa(info, c);
-	}
 	else
-	{
-		lputstr("0x", &(info->p_b));
 		lputexa(info, c);
-	}
 }
 
 void	handle_dot(t_flags *flags, t_info *info, char c)
 {
-	int		len;
-	int		arg;
-	char	ret;
-
-	len = find_len(flags, info, c);
-	ret = malloc(sizeof(char) * (len + 1));
 	if (c == 's' || c == 'c' || c == 'p')
 	{
 		if (c == 'c')
@@ -82,5 +45,5 @@ void	handle_dot(t_flags *flags, t_info *info, char c)
 			lputadrr(info);
 	}
 	else
-		put_precision(ret, flags, info, c);
+		put_precision(flags, info, c);
 }

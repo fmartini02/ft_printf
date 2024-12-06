@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   madatory_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:00:14 by francema          #+#    #+#             */
-/*   Updated: 2024/11/27 18:07:03 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:52:03 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	lputunsigned(t_info *info)
 	free(s);
 }
 
-void	lputexa(t_info *info, char c, )
+void	lputexa(t_info *info, char c)
 {
 	char			*base;
 	char			*buf;

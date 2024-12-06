@@ -6,13 +6,13 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:41:10 by francema          #+#    #+#             */
-/*   Updated: 2024/12/03 16:18:43 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:55:04 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*char_case(t_flags *flags, t_info *info, char *ret)
+void	char_case(t_flags *flags, t_info *info)
 {
 	int	n;
 	int	i;
@@ -21,22 +21,19 @@ char	*char_case(t_flags *flags, t_info *info, char *ret)
 	i = 0;
 	if (flags->neg)
 	{
-		ret[i++] = n;
-		while (i < flags->num)
-			ret[i++] = ' ';
-		ret[i] = '\0';
+		lputchar(n, &(info->p_b));
+		while (i++ < flags->num)
+			lputchar(' ', &(info->p_b));
 	}
 	else
 	{
 		while (i < flags->num - 1)
-			ret[i++] = ' ';
-		ret[i] = n;
-		ret[i + 1] = '\0';
+			lputchar(' ', &(info->p_b));
+		lputchar(n, &(info->p_b));
 	}
-	return (ret);
 }
 
-char	*str_case(t_flags *flags, t_info *info, char *ret)
+void	str_case(t_flags *flags, t_info *info)
 {
 	char	*arg;
 	int		i;
@@ -46,26 +43,20 @@ char	*str_case(t_flags *flags, t_info *info, char *ret)
 	if (flags->neg)
 	{
 		while(arg[i])
-		{
-			ret[i] = arg[i];
-			i++;
-		}
-		while (i < flags->num)
-			ret[i++] = ' ';
-		ret[i] = '\0';
+			lputchar(arg[i++], &(info->p_b));
+		while (i++ < flags->num)
+			lputchar(' ', &(info->p_b));
 	}
 	else
 	{
-		while(i < (flags->num - ft_strlen(arg)))
-			ret[i] = ' ';
+		while(i++ < (flags->num - (int)ft_strlen(arg)))
+			lputchar(' ', &(info->p_b));
 		while(*arg)
-			ret[i++] = (*arg)++;
-		ret[i] = '\0';
+			lputchar((*arg)++, &(info->p_b));
 	}
-	return (ret);
 }
 
-char	*int_case(t_flags *flags, t_info *info, char *ret)
+void	int_case(t_flags *flags, t_info *info)
 {
 	int		n;
 	int		i;
@@ -75,25 +66,20 @@ char	*int_case(t_flags *flags, t_info *info, char *ret)
 	arg = ft_itoa(n);
 	i = 0;
 	if (flags->neg)
-		int_case_utils(flags, info, ret, arg);
+		int_neg_case(flags, info, arg);
 	else
 	{
+		while (i++ < (flags->num  - (int)ft_strlen(arg)))
+			lputchar('0', &(info->p_b));
+		while (*arg)
+			lputchar((*arg)++, &(info->p_b));
 		if (flags->pos)
-			int_case_utils2(flags, info, ret, arg);
-		else
-		{
-			while (i < (flags->num  - ft_strlen(arg)))
-				ret[i++] = '0';
-			while (*arg)
-				ret[i++] = (*arg)++;
-		}
-		ret[i] = '\0';
+			int_pos_case(info, arg);
 	}
 	free(arg);
-	return (ret);
 }
 
-char	*uns_case(t_flags *flags, t_info *info, char *ret)
+void	uns_case(t_flags *flags, t_info *info)
 {
 	unsigned int	u;
 	char			*arg;
@@ -104,20 +90,17 @@ char	*uns_case(t_flags *flags, t_info *info, char *ret)
 	i = 0;
 	if (flags->neg)
 	{
-		i -= 1;
-		while(arg[++i])
-			ret[i] = arg[i];
-		while(i < flags->num)
-			ret[i++] = '0';
+		while(arg[i])
+			lputchar(arg[i++], &(info->p_b));
+		while(i++ < flags->num)
+			lputchar('0', &(info->p_b));
 	}
 	else
 	{
-		while(i < (u - ft_num_len(u, 10)))
-			ret[i++] = '0';
+		while(i < (flags->num - ft_num_len(u, 10)))
+			lputchar('0', &(info->p_b));
 		while(*arg)
-			ret[i++] = (*arg)++;
+			lputchar((*arg)++, &(info->p_b));
 	}
-	ret[i] = '\0';
 	free(arg);
-	return (ret);
 }

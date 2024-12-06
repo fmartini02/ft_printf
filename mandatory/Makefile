@@ -1,6 +1,13 @@
 .SILENT:
 
-SRC	= main.c mandatory_utils.c basic_fun.c handle_spec.c dot_case.c zero_case.c bonus_utils.c
+SRC	= main.c \
+	mandatory_utils.c \
+	basic_fun.c \
+	handle_spec.c \
+	handle_space.c \
+	dot_case.c \
+	zero_case.c \
+	bonus_utils.c \
 
 OBJS = $(SRC:.c=.o)
 

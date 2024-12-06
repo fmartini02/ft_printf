@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   basic_fun.c                                        :+:      :+:    :+:   */
+/*   basic_fun_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:39:25 by francema          #+#    #+#             */
-/*   Updated: 2024/11/29 11:44:30 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:14:59 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	lputchar(char c, int *r)
 {
@@ -59,14 +59,14 @@ void	lputnbr(t_info *info, int n)
 		lputchar(nb + 48, pb);
 }
 
-int	ft_skip_num(char *s, int i)
+int	ft_skip_num(const char *s, int i)
 {
 	while (s[i] >= '0' && s[i] <= '9')
 		i++;
 	return (i);
 }
 
-void	init_info(t_info *info, char *str, va_list *args)
+void	init_info(t_info *info, const char *str, va_list *args)
 {
 	info->s = str;
 	info->p_b = 0;

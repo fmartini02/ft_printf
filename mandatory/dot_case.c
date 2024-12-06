@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:05:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 11:45:34 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:43:41 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	num_len_greatest(t_info *info, char c, int arg)
 		lputchar(va_arg(*(info->args), int), &(info->p_b));
 	else if (c == 'p')
 		lputadrr(info);
-	else if (c == 'u');
+	else if (c == 'u')
 		lputunsigned(info);
 }
 
@@ -77,7 +77,7 @@ void	width_putin(t_flags *flags, t_info *info, int arg, char *s)
 	int	i;
 
 	i = 0;
-	n_len = (arg, 10);
+	n_len = ft_num_len(arg, 10);
 	if (flags->neg)
 	{
 		while(n_len + i++ < flags->dot)
@@ -100,7 +100,7 @@ void	width_putin(t_flags *flags, t_info *info, int arg, char *s)
 	}
 }
 
-void	put_precision(char *ret, t_flags *flags, t_info *info, char c)
+void	put_precision(t_flags *flags, t_info *info, char c)
 {
 	char				*s;
 	unsigned long int	arg;
@@ -111,7 +111,7 @@ void	put_precision(char *ret, t_flags *flags, t_info *info, char c)
 	if (c == 'd' || c == 'i')
 	{
 		arg = va_arg(*(info->args), int);
-		n_len = ft_num_len((unsigned long)arg, 10);
+		n_len = ft_num_len(arg, 10);
 		s = ft_itoa(arg);
 	}
 	else

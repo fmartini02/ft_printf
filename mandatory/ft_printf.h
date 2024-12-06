@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/03 16:21:34 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:54:45 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,20 @@ void	lputnbr(t_info *info, int n);
 void	lputunsigned(t_info *info);
 void	lputexa(t_info *info, char c);
 void	lputadrr(t_info *info);
-int		ft_skip_num(char *s, int i);
-void	init_info(t_info *info, char *str, va_list *args);
-char	*char_case(t_flags *flags, t_info *info, char *ret);
-char	*str_case(t_flags *flags, t_info *info, char *ret);
-char	*int_case(t_flags *flags, t_info *info, char *ret);
-char	*uns_case(t_flags *flags, t_info *info, char *ret);
-void	int_case_utils(t_flags *flags, t_info *info, char *ret, char *arg);
-void	int_case_utils2(t_flags *flags, t_info *info, char *ret, char *arg);
+int		ft_skip_num(const char *s, int i);
+void	init_info(t_info *info, const char *str, va_list *args);
+void	init_flags(char c, t_flags *flags, t_info *info, int *i);
+void	char_case(t_flags *flags, t_info *info);
+void	str_case(t_flags *flags, t_info *info);
+void	int_case(t_flags *flags, t_info *info);
+void	uns_case(t_flags *flags, t_info *info);
+void	int_neg_case(t_flags *flags, t_info *info, char *arg);
+void	int_pos_case(t_info *info, char *arg);
+void	handle_zero(t_flags *flags, t_info *info, char c);
+void	handle_space(t_info *info, char c);
+void	handle_sharp(t_info *info, char c);
+void	handle_dot(t_flags *flags, t_info *info, char c);
+int		check_stdflags(char c);
+void	put_precision(t_flags *flags, t_info *info, char c);
+
 #endif

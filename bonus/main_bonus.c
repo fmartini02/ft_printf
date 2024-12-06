@@ -1,48 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 11:48:27 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:15:29 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-void	*handle_specflag(t_flags *flags, t_info *info)
+void	handle_specflag(t_flags *flags, t_info *info)
 {
-	char	*s;
-	char	c;
+	const char	*s;
+	char		c;
 
 	s = info->s;
 	c = s[info->i + 1];//bcs stop before the std flags
 	if (flags->zero && !flags->sharp && flags->num && !flags->dot)
 		handle_zero(flags, info, c);
-	if (flags->space && !flags->pos)
-		handle_space(flags, info, c);
+	if (flags->space && !flags->pos && !flags->neg)
+		handle_space(info, c);
 	if (flags->sharp && (c == 'x' || c == 'X'))
-		handle_sharp(flags, info, c);
+		handle_sharp(info, c);
 	if (flags->dot)
 		handle_dot(flags, info, c);
 }
 
-void	*spec_flag(t_info *info)
+void	spec_flag(t_info *info)
 {
-	t_flags	*flags;
-	char	*s;
-	int		i;
+	int			i;
+	t_flags		*flags;
+	const char	*s;
 
 	flags = malloc(sizeof(t_flags) * 1);
 	if (!flags)
-		return (NULL);
+		return ;
 	s = info->s;
 	i = info->i;
 	while(check_stdflags(s[i]))
-		init_flags(s[i++], flags, info);
-	handle_specflags(flags, info);
+		init_flags(s[i++], flags, info, &i);
+	handle_specflag(flags, info);
 }
 
 void	expand_flags(t_info *info)
@@ -52,7 +52,7 @@ void	expand_flags(t_info *info)
 
 	str = info->s;
 	j = info->i;
-	if (!check_stdflags(str[j]))
+	if (check_stdflags(str[j]))
 		spec_flag(info);
 	else if (str[j] == 's')
 		lputstr(va_arg(*(info->args), char *), &(info->p_b));
@@ -97,7 +97,7 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (p_b);
 }
-
+/*
 int main()
 {
 	//printf("std %c \n", '0');
@@ -126,6 +126,6 @@ int main()
 	//ft_printf("_%d_\n", INT_MIN);
 	//printf("%%\n");
 	//ft_printf("%%\n");
-}
+} */
 //printf("%x", -2147483648)
 //printf("%x", 2147483647)
