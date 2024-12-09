@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 16:14:35 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:18:04 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include <stdint.h>
 # include <limits.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_info
 {

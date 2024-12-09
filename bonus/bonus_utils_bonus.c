@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:46:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 16:15:05 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:23:42 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,10 @@ void	int_neg_case(t_flags *flags, t_info *info, char *arg)
 
 void	int_pos_case(t_info *info, char *arg)
 {
-	int	i;
-
-	i = 0;
 	if (arg[0] == '-')
 		lputchar('-', &(info->p_b));
 	else if (arg[0] == '+')
 		lputchar('+', &(info->p_b));
-	i++;
 }
 /*
 void	init_flags(char c, t_flags *flags, t_info *info, int *i)
