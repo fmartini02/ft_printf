@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   madatory_utils.c                                   :+:      :+:    :+:   */
+/*   mandatory_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:00:14 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 11:52:03 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:40:21 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	build_num(unsigned long int n, char *base, char *buf)
+void	build_num(unsigned long int n, char *base, char *buf)
 {
 	int	len;
 	int	l_base;

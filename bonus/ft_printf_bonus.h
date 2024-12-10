@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/10 11:41:30 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:17:31 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	handle_zero(t_flags *flags, t_info *info, char c);
 void	handle_space(t_info *info, char c);
 void	handle_sharp(t_info *info, char c);
 void	handle_dot(t_flags *flags, t_info *info, char c);
-void	handle_num(int neg, int width, t_info *info, char c);
+void	handle_num(int width, t_info *info, char c);
 void	magic_ptr(void *ptr, int width, t_info *info);
 void	magic_uns(unsigned int uns, char c, int width, t_info *info);
 void	magic_char(int n, int width, t_info *info);

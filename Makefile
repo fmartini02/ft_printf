@@ -5,6 +5,9 @@ SRC	= main.c \
 	basic_fun.c \
 	handle_spec.c \
 	handle_space.c \
+	handle_num.c \
+	num_utils.c \
+	neg_num_utils.c \
 	dot_case.c \
 	zero_case.c \
 	bonus_utils.c \
@@ -14,15 +17,16 @@ SRC_BONUS = main_bonus.c \
 	basic_fun_bonus.c \
 	handle_spec_bonus.c \
 	handle_space_bonus.c \
-	handle_num.c \
-	num_utils.c \
+	handle_num_bonus.c \
+	num_utils_bonus.c \
+	neg_num_utils_bonus.c \
 	dot_case_bonus.c \
 	zero_case_bonus.c \
 	bonus_utils_bonus.c \
 
 OBJS = $(addprefix mandatory/, $(notdir $(SRC:.c=.o)))
 
-OBJS_BONUS = $(OBJS) $(addprefix bonus/, $(notdir $(SRC_BONUS:.c=.o)))
+OBJS_BONUS = $(addprefix bonus/, $(notdir $(SRC_BONUS:.c=.o)))
 
 NAME = libftprintf.a
 
@@ -42,8 +46,6 @@ MAKE := make --no-print-directory
 	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
 all: $(NAME)
-
-bonus: $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C libft

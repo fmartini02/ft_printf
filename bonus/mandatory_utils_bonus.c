@@ -6,13 +6,13 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:00:14 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 16:15:34 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:18:21 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static void	build_num(unsigned long int n, char *base, char *buf)
+void	build_num(unsigned long int n, char *base, char *buf)
 {
 	int	len;
 	int	l_base;

@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:39:25 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 15:52:55 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:08:41 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int	ft_skip_num(const char *s, int i)
 void	init_info(t_info *info, const char *str, va_list *args)
 {
 	info->s = str;
-	info->p_b = 0;
 	info->i = 0;
+	info->p_b = 0;
+	info->p_tmp = 0;
+	info->u_tmp = 0;
 	info->args = args;
 }

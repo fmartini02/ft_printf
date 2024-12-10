@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/10 11:37:27 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:49:18 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ void	handle_specflag(t_flags *flags, t_info *info)
 	if (flags->dot)
 		handle_dot(flags, info, c);
 	if (flags->num)
-		handle_num(flags->neg, flags->num, info, c);
+	{
+		if (flags->neg)
+			neg_case(flags->num, info, c);
+		else
+			handle_num(flags->num, info, c);
+	}
 	else
 		expand_flags(info);
 }
@@ -42,6 +47,13 @@ void	spec_flag(t_info *info)
 	flags = malloc(sizeof(t_flags) * 1);
 	if (!flags)
 		return ;
+	flags->num = 0;
+	flags->zero = 0;
+	flags->space = 0;
+	flags->dot = 0;
+	flags->neg = 0;
+	flags->pos = 0;
+	flags->sharp = 0;
 	s = info->s;
 	i = info->i;
 	while(check_stdflags(s[i]))
@@ -50,6 +62,7 @@ void	spec_flag(t_info *info)
 		i++;
 	}
 	handle_specflag(flags, info);
+	free(flags);
 }
 
 void	expand_flags(t_info *info)

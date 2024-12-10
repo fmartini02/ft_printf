@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/09 12:01:43 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:39:07 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	handle_specflag(t_flags *flags, t_info *info)
 		handle_sharp(info, c);
 	if (flags->dot)
 		handle_dot(flags, info, c);
+	if (flags->num)
+	{
+		if (flags->neg)
+			neg_case(flags->num, info, c);
+		else
+			handle_num(flags->num, info, c);
+	}
 	else
 		expand_flags(info);
 }

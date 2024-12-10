@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/09 12:01:51 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:54:21 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_flags
 
 int		ft_printf(const char *str, ...);
 void	expand_flags(t_info *info);
+void	build_num(unsigned long int n, char *base, char *buf);
 void	lputchar(char c, int *r);
 void	lputstr(char *s, int *r);
 void	lputnbr(t_info *info, int n);
@@ -63,6 +64,18 @@ void	handle_zero(t_flags *flags, t_info *info, char c);
 void	handle_space(t_info *info, char c);
 void	handle_sharp(t_info *info, char c);
 void	handle_dot(t_flags *flags, t_info *info, char c);
+void	handle_num(int width, t_info *info, char c);
+void	print_width(int width, int len, t_info *info);
+void	neg_case(int width, t_info *info, char c);
+void	neg_magic_ptr(void *ptr, int width, t_info *info);
+void	neg_magic_uns(unsigned int uns, char c, int width, t_info *info);
+void	neg_magic_char(int n, int width, t_info *info);
+void	neg_magic_num(char *arg, int width, t_info *info);
+void	ptr_case(unsigned long nu, t_info *info);
+void	magic_ptr(void *ptr, int width, t_info *info);
+void	magic_uns(unsigned int uns, char c, int width, t_info *info);
+void	magic_char(int n, int width, t_info *info);
+void	magic_num(char *arg, int width, t_info *info);
 int		check_stdflags(char c);
 void	put_precision(t_flags *flags, t_info *info, char c);
 
