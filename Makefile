@@ -14,13 +14,15 @@ SRC_BONUS = main_bonus.c \
 	basic_fun_bonus.c \
 	handle_spec_bonus.c \
 	handle_space_bonus.c \
+	handle_num.c \
+	num_utils.c \
 	dot_case_bonus.c \
 	zero_case_bonus.c \
 	bonus_utils_bonus.c \
 
 OBJS = $(addprefix mandatory/, $(notdir $(SRC:.c=.o)))
 
-OBJS_BONUS = $(addprefix bonus/, $(notdir $(SRC_BONUS:.c=.o)))
+OBJS_BONUS = $(OBJS) $(addprefix bonus/, $(notdir $(SRC_BONUS:.c=.o)))
 
 NAME = libftprintf.a
 

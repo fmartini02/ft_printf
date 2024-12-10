@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 16:15:29 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:37:27 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_specflag(t_flags *flags, t_info *info)
 	char		c;
 
 	s = info->s;
-	c = s[info->i + 1];//bcs stop before the std flags
+	c = s[info->i];//bcs stop before the std flags
 	if (flags->zero && !flags->sharp && flags->num && !flags->dot)
 		handle_zero(flags, info, c);
 	if (flags->space && !flags->pos && !flags->neg)
@@ -27,6 +27,10 @@ void	handle_specflag(t_flags *flags, t_info *info)
 		handle_sharp(info, c);
 	if (flags->dot)
 		handle_dot(flags, info, c);
+	if (flags->num)
+		handle_num(flags->neg, flags->num, info, c);
+	else
+		expand_flags(info);
 }
 
 void	spec_flag(t_info *info)
@@ -41,7 +45,10 @@ void	spec_flag(t_info *info)
 	s = info->s;
 	i = info->i;
 	while(check_stdflags(s[i]))
-		init_flags(s[i++], flags, info, &i);
+	{
+		init_flags(s[i], flags, info, &i);
+		i++;
+	}
 	handle_specflag(flags, info);
 }
 

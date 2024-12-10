@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/09 10:17:52 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:01:51 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_flags
 }	t_flags;
 
 int		ft_printf(const char *str, ...);
+void	expand_flags(t_info *info);
 void	lputchar(char c, int *r);
 void	lputstr(char *s, int *r);
 void	lputnbr(t_info *info, int n);

@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:46:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/09 10:18:32 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:16:20 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_flags(char c, t_flags *flags, t_info *info, int *i)
 		flags->zero += 1;
 	else if (c >= '1' && c <= '9')
 	{
-		flags->num = ft_atoi(&s[j + 1]);
-		info->i = ft_skip_num(s, j + 1);
+		flags->num = ft_atoi(&s[j]);
+		info->i = ft_skip_num(s, j);
 	}
 	else if (c == '.')
 	{

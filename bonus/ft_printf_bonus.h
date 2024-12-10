@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/09 10:18:04 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:41:30 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,11 @@
 # include <stdarg.h>
 # include <stdint.h>
 # include <limits.h>
+# include "../mandatory/ft_printf.h"
 # include "../libft/libft.h"
 
-typedef struct s_info
-{
-	const char			*s;
-	int					i;
-	int					p_b;
-	unsigned long int	p_tmp;
-	unsigned int		u_tmp;
-	va_list				*args;
-}	t_info;
-
-typedef struct s_flags
-{
-	int	num;
-	int	zero;
-	int	space;
-	int	dot;
-	int	neg;
-	int	pos;
-	int	sharp;
-	/*int	ptr;*/
-}	t_flags;
-
 int		ft_printf(const char *str, ...);
+void	expand_flags(t_info *info);
 void	lputchar(char c, int *r);
 void	lputstr(char *s, int *r);
 void	lputnbr(t_info *info, int n);
@@ -62,6 +42,11 @@ void	handle_zero(t_flags *flags, t_info *info, char c);
 void	handle_space(t_info *info, char c);
 void	handle_sharp(t_info *info, char c);
 void	handle_dot(t_flags *flags, t_info *info, char c);
+void	handle_num(int neg, int width, t_info *info, char c);
+void	magic_ptr(void *ptr, int width, t_info *info);
+void	magic_uns(unsigned int uns, char c, int width, t_info *info);
+void	magic_char(int n, int width, t_info *info);
+void	magic_num(char *arg, int width, t_info *info);
 int		check_stdflags(char c);
 void	put_precision(t_flags *flags, t_info *info, char c);
 
