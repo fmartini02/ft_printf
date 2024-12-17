@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_space_bonus.c                               :+:      :+:    :+:   */
+/*   ft_uns_len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 14:23:07 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 16:15:18 by francema         ###   ########.fr       */
+/*   Created: 2024/12/17 16:25:33 by francema          #+#    #+#             */
+/*   Updated: 2024/12/17 16:31:35 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "libft.h"
 
-void	handle_space(t_info *info, char c)
+int	ft_uns_len(unsigned long long n, int base)
 {
-	lputchar(' ', &(info->p_b));
-	if (c == 'd' || c == 'i')
-		lputnbr(info, va_arg(*(info->args), int));
-	else if (c == 'x' || c == 'X')
-		lputexa(info, c);
-	else if (c == 'c')
-		lputchar(va_arg(*(info->args), int), &(info->p_b));
-	else if (c == 's')
-		lputstr(va_arg(*(info->args), char *), &(info->p_b));
+	int	len;
+
+	len = 0;
+	if (n == 0)
+		return (1);
+	while (n > 0)
+	{
+		len++;
+		n /= base;
+	}
+	return (len);
 }

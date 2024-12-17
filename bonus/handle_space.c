@@ -6,17 +6,17 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:23:07 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 15:41:45 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:53:52 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	handle_space(t_info *info, char c)
 {
 	lputchar(' ', &(info->p_b));
 	if (c == 'd' || c == 'i')
-		lputnbr(info, va_arg(*(info->args), int));
+		lputnbr(va_arg(*(info->args), int), &(info->p_b));
 	else if (c == 'x' || c == 'X')
 		lputexa(info, c);
 	else if (c == 'c')

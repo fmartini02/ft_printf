@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/10 18:49:18 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:53:08 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,26 @@ void	handle_specflag(t_flags *flags, t_info *info)
 
 	s = info->s;
 	c = s[info->i];//bcs stop before the std flags
-	if (flags->zero && !flags->sharp && flags->num && !flags->dot)
+	if (flags->zero && !flags->sharp && flags->num && flags->dot == -1)
 		handle_zero(flags, info, c);
 	if (flags->space && !flags->pos && !flags->neg)
 		handle_space(info, c);
 	if (flags->sharp && (c == 'x' || c == 'X'))
+	{
 		handle_sharp(info, c);
-	if (flags->dot)
+		flags->done = 1;
+	}
+	if (flags->dot != -1)
 		handle_dot(flags, info, c);
-	if (flags->num)
+	if (flags->num && !flags->done)
 	{
 		if (flags->neg)
-			neg_case(flags->num, info, c);
+			neg_case(flags->num, info, c, flags);
 		else
-			handle_num(flags->num, info, c);
+			handle_num(flags->num, info, c, flags);
+		flags->done = 1;
 	}
-	else
+	if (!flags->done)
 		expand_flags(info);
 }
 
@@ -48,19 +52,18 @@ void	spec_flag(t_info *info)
 	if (!flags)
 		return ;
 	flags->num = 0;
+	flags->done = 0;
 	flags->zero = 0;
 	flags->space = 0;
-	flags->dot = 0;
+	flags->dot = -1;
 	flags->neg = 0;
 	flags->pos = 0;
 	flags->sharp = 0;
 	s = info->s;
 	i = info->i;
 	while(check_stdflags(s[i]))
-	{
-		init_flags(s[i], flags, info, &i);
-		i++;
-	}
+		i = init_flags(s[i], flags, info, &i);
+	info->i = i;
 	handle_specflag(flags, info);
 	free(flags);
 }
@@ -79,9 +82,9 @@ void	expand_flags(t_info *info)
 	else if (str[j] == 'c')
 		lputchar(va_arg(*(info->args), int), &(info->p_b));
 	else if (str[j] == 'd' || str[j] == 'i')
-		lputnbr(info, va_arg(*(info->args), int));
+		lputnbr(va_arg(*(info->args), int), &(info->p_b));
 	else if (str[j] == 'u')
-		lputunsigned(info);
+		lputunsigned(va_arg(*(info->args), unsigned), &(info->p_b));
 	else if (str[j] == 'x' || str[j] == 'X')
 		lputexa(info, str[j]);
 	else if (str[j] == 'p')
@@ -117,35 +120,4 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (p_b);
 }
-/*
-int main()
-{
-	//printf("std %c \n", '0');
-	//ft_printf("my %c \n", '0');
-	//printf("std %c\n", '0' - 256);
-	//ft_printf("my %c\n", '0' - 256);
-	//printf("std %c %c %c \n", '0', 0, '1');
-	//ft_printf("my %c %c %c \n", '0', 0, '1');
-	//printf("std_%c_%c_%c_\n", ' ', ' ', ' ');
-	//ft_printf("my_%c_%c_%c_\n", ' ', ' ', ' ');
-	printf("std\t%s\n", ".");
-	ft_printf("my\t%s\n", ".");
-	//printf("printed_b= %d\n", printf("_%u_\n", -1));
-	//printf("printed_b= %d\n", ft_printf("_%u_\n", -1));
-	//printf("p_b= %d\n", printf("_%p_%p_\n", (void *)LONG_MIN,
-	//(void *)LONG_MAX));
-	//printf("p_b= %d\n", ft_printf("_%p_%p_\n",
-	//(void *)LONG_MIN, (void *)LONG_MAX));
-	//printf("_%d_\n", 0);
-	//ft_printf("_%d_\n", 0);
-	//printf("_%d_\n", -10);
-	//ft_printf("_%d_\n", -10);
-	//printf("_%x_\n", -10);
-	//ft_printf("_%x_\n", -10);
-	//printf("_%d_\n", INT_MIN);
-	//ft_printf("_%d_\n", INT_MIN);
-	//printf("%%\n");
-	//ft_printf("%%\n");
-} */
-//printf("%x", -2147483648)
-//printf("%x", 2147483647)
+

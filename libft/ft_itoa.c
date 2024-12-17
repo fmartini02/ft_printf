@@ -40,13 +40,13 @@ char	*limits_cases(int n)
 	return (NULL);
 }
 
-void	ft_itoa_utils(int n, char *res, int flag)
+void	ft_itoa_utils(long long int n, char *res)
 {
 	int	len;
 
 	len = ft_len(n);
 	res[len--] = '\0';
-	if (flag)
+	if (n < 0)
 	{
 		n *= -1;
 		res[0] = '-';
@@ -54,19 +54,16 @@ void	ft_itoa_utils(int n, char *res, int flag)
 	while (n != 0)
 	{
 		res[len--] = (n % 10) + 48;
+	//	printf("len + 1:%d\n", len + 1);
 		n /= 10;
 	}
+	//printf("res: %s\n", res);
 }
 
 char	*ft_itoa(long long int n)
 {
 	char	*res;
-	int		flag;
 
-	if (n < 0)
-		flag = 1;
-	else
-		flag = 0;
 	if (n == INT_MIN || n == INT_MAX)
 		return (limits_cases(n));
 	else if (n == 0)
@@ -76,7 +73,7 @@ char	*ft_itoa(long long int n)
 		res = malloc(ft_len(n) + 1);
 		if (!res)
 			return (NULL);
-		ft_itoa_utils(n, res, flag);
+		ft_itoa_utils(n, res);
 	}
 	return (res);
 }

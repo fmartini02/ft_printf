@@ -6,56 +6,11 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/10 16:39:07 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:52:11 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	handle_specflag(t_flags *flags, t_info *info)
-{
-	const char	*s;
-	char		c;
-
-	s = info->s;
-	c = s[info->i];//bcs stop before the std flags
-	if (flags->zero && !flags->sharp && flags->num && !flags->dot)
-		handle_zero(flags, info, c);
-	if (flags->space && !flags->pos && !flags->neg)
-		handle_space(info, c);
-	if (flags->sharp && (c == 'x' || c == 'X'))
-		handle_sharp(info, c);
-	if (flags->dot)
-		handle_dot(flags, info, c);
-	if (flags->num)
-	{
-		if (flags->neg)
-			neg_case(flags->num, info, c);
-		else
-			handle_num(flags->num, info, c);
-	}
-	else
-		expand_flags(info);
-}
-
-void	spec_flag(t_info *info)
-{
-	int			i;
-	t_flags		*flags;
-	const char	*s;
-
-	flags = malloc(sizeof(t_flags) * 1);
-	if (!flags)
-		return ;
-	s = info->s;
-	i = info->i;
-	while(check_stdflags(s[i]))
-	{
-		init_flags(s[i], flags, info, &i);
-		i++;
-	}
-	handle_specflag(flags, info);
-}
 
 void	expand_flags(t_info *info)
 {
@@ -65,15 +20,15 @@ void	expand_flags(t_info *info)
 	str = info->s;
 	j = info->i;
 	if (check_stdflags(str[j]))
-		spec_flag(info);
+		return ;
 	else if (str[j] == 's')
 		lputstr(va_arg(*(info->args), char *), &(info->p_b));
 	else if (str[j] == 'c')
 		lputchar(va_arg(*(info->args), int), &(info->p_b));
 	else if (str[j] == 'd' || str[j] == 'i')
-		lputnbr(info, va_arg(*(info->args), int));
+		lputnbr(va_arg(*(info->args), int), &(info->p_b));
 	else if (str[j] == 'u')
-		lputunsigned(info);
+		lputunsigned(va_arg(*(info->args), unsigned), &(info->p_b));
 	else if (str[j] == 'x' || str[j] == 'X')
 		lputexa(info, str[j]);
 	else if (str[j] == 'p')

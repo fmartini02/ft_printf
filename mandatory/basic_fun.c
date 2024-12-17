@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:39:25 by francema          #+#    #+#             */
-/*   Updated: 2024/12/10 18:08:41 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:51:14 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,28 @@ void	lputstr(char *s, int *r)
 		lputchar(s[i], r);
 }
 
-void	lputnbr(t_info *info, int n)
+void	lputnbr(int n, int *p_b)
 {
 	long int	nb;
-	void		*pb;
 
-	pb = &(info->p_b);
 	nb = n;
 	if (nb == INT_MIN)
 	{
-		lputchar('-', pb);
+		lputchar('-', p_b);
 		nb *= -1;
 	}
 	if (nb < 0)
 	{
-		lputchar('-', pb);
+		lputchar('-', p_b);
 		nb = -nb;
 	}
 	if (nb > 9)
 	{
-		lputnbr(info, nb / 10);
+		lputnbr(nb / 10, p_b);
 		nb = nb % 10;
 	}
 	if (nb < 10)
-		lputchar(nb + 48, pb);
+		lputchar(nb + 48, p_b);
 }
 
 int	ft_skip_num(const char *s, int i)

@@ -1,28 +1,21 @@
 .SILENT:
 
 SRC	= main.c \
-	mandatory_utils.c \
 	basic_fun.c \
+	mandatory_utils.c \
+
+SRC_BONUS = main_bonus.c \
+	mandatory_utils_bonus.c \
+	basic_fun_bonus.c \
 	handle_spec.c \
 	handle_space.c \
 	handle_num.c \
 	num_utils.c \
 	neg_num_utils.c \
 	dot_case.c \
+	dot_uns_case.c \
 	zero_case.c \
 	bonus_utils.c \
-
-SRC_BONUS = main_bonus.c \
-	mandatory_utils_bonus.c \
-	basic_fun_bonus.c \
-	handle_spec_bonus.c \
-	handle_space_bonus.c \
-	handle_num_bonus.c \
-	num_utils_bonus.c \
-	neg_num_utils_bonus.c \
-	dot_case_bonus.c \
-	zero_case_bonus.c \
-	bonus_utils_bonus.c \
 
 OBJS = $(addprefix mandatory/, $(notdir $(SRC:.c=.o)))
 

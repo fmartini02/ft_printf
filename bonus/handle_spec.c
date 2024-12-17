@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_spec_bonus.c                                :+:      :+:    :+:   */
+/*   handle_spec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:49:44 by francema          #+#    #+#             */
-/*   Updated: 2024/12/06 16:15:24 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:23:34 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	handle_zero(t_flags *flags, t_info *info, char c)
 		int_case(flags, info);
 	else if (c == 'u')
 		uns_case(flags, info);
+	else if (c == 'x' || c == 'X')
+		exa_case(flags, info, c);
+	flags->done = 1;
 }
 
 void	handle_sharp(t_info *info, char c)
@@ -33,17 +36,51 @@ void	handle_sharp(t_info *info, char c)
 		lputexa(info, c);
 }
 
+char	*ft_get_adrr(void *ptr)
+{
+	char	*base;
+	char	*BASE;
+	char	*tmp;
+	int		len;
+
+	base = "0123456789abcdef";
+	BASE = "0123456789ABCDEF";
+	len = ft_uns_len((unsigned long)ptr, 16);
+	tmp = malloc(sizeof(char) * (len + 3));
+	if (!tmp)
+		return (NULL);
+	tmp[len + 2] = '\0';
+	tmp[0] = '0';
+	tmp[1] = 'x';
+	build_num((unsigned long)ptr, base, tmp);
+	return (tmp);
+}
+
 void	handle_dot(t_flags *flags, t_info *info, char c)
 {
-	if (c == 's' || c == 'c' || c == 'p')
+	int		prec_len;
+	int		i;
+	char	*s;
+	char	tmp;;
+
+	prec_len = flags->dot;
+	i = 0;
+	if (c == 's' || c == 'c' || c == 'p' || c == 'x' || c == 'X')
 	{
 		if (c == 'c')
-			lputchar(va_arg(*(info->args), int), &(info->p_b));
+		{
+			tmp = (va_arg(*(info->args), int));
+			s = ft_strdup(&tmp);
+		}
 		else if (c == 's')
-			lputstr(va_arg(*(info->args), char *), &(info->p_b));
+			s = ft_strdup((va_arg(*(info->args), char *)));
 		else if (c == 'p')
-			lputadrr(info);
+			s = ft_get_adrr(va_arg(*(info->args), void *));
+		while(i < prec_len && s[i])
+			lputchar(s[i++], &(info->p_b));
+		free(s);
 	}
 	else
-		put_precision(flags, info, c);
+		put_prec(flags, info, c);
+	flags->done = 1;
 }
