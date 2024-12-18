@@ -6,11 +6,11 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:05:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/17 18:28:51 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:43:40 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../ft_printf_bonus.h"
 
 static void	width_greatest(t_flags *flags, t_info *info, int arg, char *s)
 {
@@ -91,26 +91,15 @@ static void	width_putin(t_flags *flags, t_info *info, int arg, char *s)
 	}
 }
 
-void	put_prec(t_flags *flags, t_info *info, char c)
+void	put_prec_num(t_flags *flags, t_info *info)
 {
-	char			*s;
-	int				arg;
-	int				n_len;
+	int		n_len;
+	int		arg;
+	char	*s;
 
-	s = NULL;
-	arg = 0;
-	n_len = 0;
-	if (c == 'u')
-	{
-		put_prec_uns(flags, info);
-		return ;
-	}
-	else
-	{
-		arg = va_arg(*(info->args), int);
-		n_len = ft_num_len(arg, 10);
-		s = ft_itoa(arg);
-	}
+	arg = va_arg(*(info->args), int);
+	s = ft_itoa(arg);
+	n_len = ft_num_len(arg, 10);
 	if (flags->num <= n_len && flags->dot <= n_len)
 			lputnbr(arg, &(info->p_b));
 	else if (flags->num > n_len && n_len > flags->dot)
@@ -128,4 +117,12 @@ void	put_prec(t_flags *flags, t_info *info, char c)
 			width_putin(flags, info, arg, s);
 	}
 	free(s);
+}
+
+void	put_dot_case(t_flags *flags, t_info *info, char c)
+{
+	if (c == 'u')
+		put_prec_uns(flags, info);
+	else
+		put_prec_num(flags, info);
 }

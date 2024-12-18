@@ -6,11 +6,11 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:16:45 by francema          #+#    #+#             */
-/*   Updated: 2024/12/17 18:55:49 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:43:44 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../ft_printf_bonus.h"
 
 static void	width_greatest(t_flags *flags, t_info *info, unsigned int arg, char *s)
 {

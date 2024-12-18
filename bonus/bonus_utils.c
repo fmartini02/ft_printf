@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:46:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/11 11:49:55 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:22:35 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,19 @@ int	init_flags(char c, t_flags *flags, t_info *info, int *i)
 	return (j + 1);
 }
 
-void	int_neg_case(t_flags *flags, t_info *info, char *arg)
+void	ptr_case(void *ptr, t_info *info)
 {
-	int		i;
+	char			*tmp;
+	int				nu_len;
+	unsigned long	nu;
 
-	i = 0;
-	if (flags->pos)
-		int_pos_case(info, arg);
-	while(arg[i])
-		lputchar(arg[i++], &(info->p_b));
-	while(i < flags->num)
-		lputchar(' ', &(info->p_b));
-}
-
-void	int_pos_case(t_info *info, char *arg)
-{
-	if (arg[0] == '-')
-		lputchar('-', &(info->p_b));
-	else if (arg[0] == '+')
-		lputchar('+', &(info->p_b));
+	nu = (unsigned long)ptr;
+	nu_len = ft_uns_len(nu, 16);
+	lputstr("0x", &(info->p_b));
+	tmp = malloc(sizeof(char) * (nu_len + 1));
+	if (!tmp)
+		return;
+	build_num(nu, "0123456789abcdef", tmp);
+	lputstr(tmp, &(info->p_b));
+	free(tmp);
 }
