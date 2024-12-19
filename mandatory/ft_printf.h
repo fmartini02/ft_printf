@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/17 17:51:14 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:39:50 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_info
 int		ft_printf(const char *str, ...);
 int		check_stdflags(char c);
 void	expand_flags(t_info *info);
-void	build_num(unsigned long int n, char *base, char *buf);
+void	build_num(unsigned long int n, char *base, char *buf, int cast_type);
 void	lputchar(char c, int *r);
 void	lputstr(char *s, int *r);
 void	lputnbr(int n, int *p_b);

@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:46:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 16:22:35 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:39:08 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void	ptr_case(void *ptr, t_info *info)
 	unsigned long	nu;
 
 	nu = (unsigned long)ptr;
-	nu_len = ft_uns_len(nu, 16);
+	nu_len = ft_uns_len(nu, 16, 1) + 2;
 	lputstr("0x", &(info->p_b));
 	tmp = malloc(sizeof(char) * (nu_len + 1));
 	if (!tmp)
 		return;
-	build_num(nu, "0123456789abcdef", tmp);
+	build_num(nu, "0123456789abcdef", tmp, 1);
 	lputstr(tmp, &(info->p_b));
 	free(tmp);
 }

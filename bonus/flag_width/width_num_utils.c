@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:11:26 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 18:29:11 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:48:55 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	num_uns_case(t_info *info, t_flags *flags)
 
 	nu_len = 0;
 	n = va_arg(*(info->args), unsigned int);
-	nu_len = ft_uns_len(n, 10);
+	nu_len = ft_uns_len(n, 10, 0);
 	print_width(flags->num, nu_len, info, flags);
 	tmp = malloc(sizeof(char) * (nu_len + 1));
 	if (!tmp)
 		return ;
-	build_num(n, "0123456789", tmp);
+	build_num(n, "0123456789", tmp, 0);
 	lputstr(tmp, &(info->p_b));
 	free(tmp);
 }
@@ -53,15 +53,15 @@ void	num_exa_case(t_info *info, t_flags *flags, char c)
 	char			*tmp;
 
 	n = va_arg(*(info->args), int);
-	nu_len = ft_uns_len(n, 16);
+	nu_len = ft_uns_len(n, 16, 0);
 	print_width(flags->num, nu_len, info, flags);
 	tmp = malloc(sizeof(char) * (nu_len + 1));
 	if (!tmp)
 		return ;
 	if (c == 'x')
-		build_num(n, "0123456789abcdef", tmp);
+		build_num(n, "0123456789abcdef", tmp, 0);
 	else
-		build_num(n, "0123456789ABCDEF", tmp);
+		build_num(n, "0123456789ABCDEF", tmp, 0);
 	lputstr(tmp, &(info->p_b));
 	free(tmp);
 }

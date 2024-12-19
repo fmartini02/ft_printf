@@ -6,25 +6,25 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:23:07 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 17:01:39 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:33:37 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../ft_printf_bonus.h"
 
-void	handle_space(t_info *info, char c)
+void	handle_space(t_info *info, t_flags *flags, char c)
 {
-	lputchar(' ', &(info->p_b));
-	if (c == 'd' || c == 'i')
-		lputnbr(va_arg(*(info->args), int), &(info->p_b));
-	else if (c == 'x' || c == 'X')
-		lputexa(info, c);
-	else if (c == 'c')
-		lputchar(va_arg(*(info->args), int), &(info->p_b));
+	if (c == 'c')
+		space_char(va_arg(*(info->args), int), info, flags);
 	else if (c == 's')
-		lputstr(va_arg(*(info->args), char *), &(info->p_b));
-	else if (c == 'u')
-		lputunsigned(va_arg(*(info->args), unsigned int), &(info->p_b));
+		space_str(va_arg(*(info->args), char *), info, flags);
+	else if (c == 'x' || c == 'X')
+		space_hexa(va_arg(*(info->args), int), info, flags, c);
 	else if (c == 'p')
-		lputadrr(info);
+		space_adrr(va_arg(*(info->args), void *), info, flags);
+	else if (c == 'u')
+		space_uns(va_arg(*(info->args), unsigned int), info, flags);
+	if (c == 'd' || c == 'i')
+		space_int(va_arg(*(info->args), int), info, flags);
+	flags->done = 1;
 }

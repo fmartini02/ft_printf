@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 18:48:59 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:44:12 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_specflag(t_flags *flags, t_info *info)
 	if (flags->zero && !flags->sharp && flags->num && flags->dot == -1)
 		handle_zero(flags, info, c);
 	if (flags->space && !flags->pos && !flags->neg)
-		handle_space(info, c);
+		handle_space(info, flags, c);
 	if (flags->sharp && (c == 'x' || c == 'X'))
 		handle_sharp(info, c, flags);
 	if (flags->dot != -1)
@@ -82,7 +82,7 @@ void	expand_flags(t_info *info)
 	else if (str[j] == 'u')
 		lputunsigned(va_arg(*(info->args), unsigned), &(info->p_b));
 	else if (str[j] == 'x' || str[j] == 'X')
-		lputexa(info, str[j]);
+		lputexa(va_arg(*(info->args), int), info, str[j]);
 	else if (str[j] == 'p')
 		lputadrr(info);
 	else if (str[j] == '%')

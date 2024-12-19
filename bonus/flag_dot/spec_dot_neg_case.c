@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:19:27 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 18:16:16 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:46:42 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	dot_neg_exa_case(t_flags *flags, t_info *info, char c)
 
 	arg = va_arg(*(info->args), int);
 	n_prec = flags->dot;
-	s = malloc(sizeof(char) * (ft_uns_len(arg, 16) + 1));
+	s = malloc(sizeof(char) * (ft_uns_len(arg, 16, 0) + 1));
 	if (!s)
 		return ;
 	if (c == 'x')
-		build_num(arg, "0123456789abcdef", s);
+		build_num(arg, "0123456789abcdef", s, 0);
 	else
-		build_num(arg, "0123456789ABCDEF", s);
+		build_num(arg, "0123456789ABCDEF", s, 0);
 	if (n_prec > (int)ft_strlen(s))
 	{
 		while (n_prec-- > (int)ft_strlen(s))
@@ -86,10 +86,10 @@ void	dot_neg_ptr_case(t_flags *flags, t_info *info)
 
 	ptr = va_arg(*(info->args), void *);
 	n_prec = flags->dot;
-	s = malloc(sizeof(char) * (ft_uns_len((unsigned long)ptr, 16) + 1));
+	s = malloc(sizeof(char) * (ft_uns_len((unsigned long)ptr, 16, 1) + 1));
 	if (!s)
 		return ;
-	build_num((unsigned long)ptr, "0123456789abcdef", s);
+	build_num((unsigned long)ptr, "0123456789abcdef", s, 1);
 	lputstr("0x", &(info->p_b));
 	if (n_prec > ((int)ft_strlen(s) + 2))
 	{

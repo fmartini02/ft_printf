@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 18:54:03 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:30:37 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	lputchar(char c, int *r);
 void	lputstr(char *s, int *r);
 void	lputnbr(int n, int *p_b);
 void	lputunsigned(unsigned int n, int *p_b);
-void	lputexa(t_info *info, char c);
+void	lputexa(unsigned int u, t_info *info, char c);
 void	lputadrr(t_info *info);
 /*bonus utils*/
 void	print_width(int width, int len, t_info *info, t_flags *flags);
-void	build_num(unsigned long int n, char *base, char *buf);
+void	build_num(unsigned long int n, char *base, char *buf, int cast_type);
 int		ft_skip_num(const char *s, int i);
 void	init_info(t_info *info, const char *str, va_list *args);
 int		init_flags(char c, t_flags *flags, t_info *info, int *i);
@@ -97,7 +97,13 @@ void	zero_int_case(t_flags *flags, t_info *info);
 void	zero_uns_case(t_flags *flags, t_info *info);
 void	zero_exa_case(t_flags *flags, t_info *info, char c);
 /*space flag fun*/
-void	handle_space(t_info *info, char c);
+void	handle_space(t_info *info, t_flags *flags, char c);
+void	space_char(int c, t_info *info, t_flags *flags);
+void	space_str(char *s, t_info *info, t_flags *flags);
+void	space_adrr(void *p, t_info *info, t_flags *flags);
+void	space_hexa(unsigned int n, t_info *info, t_flags *flags, char c);
+void	space_uns(unsigned int n, t_info *info, t_flags *flags);
+void	space_int(int n, t_info *info, t_flags *flags);
 /*sharp flag fun*/
 void	handle_sharp(t_info *info, char c, t_flags *flags);
 

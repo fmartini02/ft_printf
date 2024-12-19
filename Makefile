@@ -5,24 +5,26 @@ SRC	= main.c \
 	mandatory_utils.c \
 
 SRC_BONUS = main_bonus.c \
-	operator_dot/dot_case.c \
-	operator_dot/handle_dot_case.c \
-	operator_dot/dot_uns_case.c \
-	operator_dot/spec_dot_case.c \
-	operator_dot/spec_dot_neg_case.c \
-	operator_width/handle_width.c \
-	operator_width/neg_width_num_utils.c \
-	operator_width/neg_width_utils.c \
-	operator_width/width_num_utils.c \
-	operator_width/width_utils.c \
-	operator_zero/handle_zero.c \
-	operator_zero/neg_zero_addr.c \
-	operator_zero/neg_zero_num.c \
-	operator_zero/zero_addr.c \
-	operator_zero/zero_num.c \
+	flag_dot/dot_case.c \
+	flag_dot/handle_dot_case.c \
+	flag_dot/dot_uns_case.c \
+	flag_dot/spec_dot_case.c \
+	flag_dot/spec_dot_neg_case.c \
+	flag_space/handle_space.c \
+	flag_space/space_num_utils.c \
+	flag_space/space_utils.c \
+	flag_width/handle_width.c \
+	flag_width/neg_width_num_utils.c \
+	flag_width/neg_width_utils.c \
+	flag_width/width_num_utils.c \
+	flag_width/width_utils.c \
+	flag_zero/handle_zero.c \
+	flag_zero/neg_zero_addr.c \
+	flag_zero/neg_zero_num.c \
+	flag_zero/zero_addr.c \
+	flag_zero/zero_num.c \
 	basic_fun_bonus.c \
 	bonus_utils.c \
-	handle_space.c \
 	handle_sharp.c \
 	mandatory_utils_bonus.c \
 
@@ -58,7 +60,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-bonus : $(OBJS_BONUS) $(LIBFT)
+bonus: $(OBJS_BONUS) $(LIBFT)
 	cp $(LIBFT) $(NAME)
 	ar rc $(NAME) $(OBJS_BONUS)
 	ranlib $(NAME)

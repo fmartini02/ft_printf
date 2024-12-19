@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:41:10 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 18:43:37 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:09:00 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	handle_zero(t_flags *flags, t_info *info, char c)
 		neg_zero_case(flags, info, c);
 	else
 		zero_case(flags, info, c);
+	flags->done = 1;
 }

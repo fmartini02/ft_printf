@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dot_uns_case.c                                     :+:      :+:    :+:   */
+/*   dot_case.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 18:16:45 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 17:43:44 by francema         ###   ########.fr       */
+/*   Created: 2024/12/03 18:05:01 by francema          #+#    #+#             */
+/*   Updated: 2024/12/19 12:01:14 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf_bonus.h"
 
-static void	width_greatest(t_flags *flags, t_info *info, unsigned int arg, char *s)
+static void	width_greatest(t_flags *flags, t_info *info, int arg, char *s)
 {
 	int		i;
 	int		width;
@@ -20,7 +20,7 @@ static void	width_greatest(t_flags *flags, t_info *info, unsigned int arg, char 
 
 	i = 0;
 	width = flags->num;
-	n_len = ft_uns_len(arg, 10);
+	n_len = ft_uns_len((unsigned long) arg, 10, 1);
 	if (flags->neg)
 	{
 		while (s[i])
@@ -37,7 +37,7 @@ static void	width_greatest(t_flags *flags, t_info *info, unsigned int arg, char 
 	}
 }
 
-static void	prec_greatest(t_info *info, t_flags *flags, unsigned int arg, char *s)
+static void	prec_greatest(t_info *info, t_flags *flags, int arg, char *s)
 {
 	int		prec;
 	int		n_len;
@@ -45,23 +45,27 @@ static void	prec_greatest(t_info *info, t_flags *flags, unsigned int arg, char *
 
 	i = 0;
 	prec = flags->dot;
-	n_len = ft_uns_len(arg, 10);
-	while(prec > n_len)
+	if (arg < 0)
 	{
-		lputchar('0', &(info->p_b));
-		n_len++;
+		lputchar('-', &(info->p_b));
+		free(s);
+		arg *= -1;
+		s = ft_itoa(arg);
 	}
-	while(s[i])
+	n_len = ft_num_len(arg, 10);
+	while(prec > n_len++)
+		lputchar('0', &(info->p_b));
+	while(s[i] && i < prec)
 		lputchar(s[i++], &(info->p_b));
 }
 
-static void	width_putin(t_flags *flags, t_info *info, unsigned int arg, char *s)
+static void	width_putin(t_flags *flags, t_info *info, int arg, char *s)
 {
 	int	n_len;
 	int	i;
 
 	i = 0;
-	n_len = ft_uns_len(arg, 10);
+	n_len = ft_num_len(arg, 10);
 	if (flags->neg)
 	{
 		while(n_len + i++ < flags->dot)
@@ -84,18 +88,19 @@ static void	width_putin(t_flags *flags, t_info *info, unsigned int arg, char *s)
 	}
 }
 
-void	put_prec_uns(t_flags *flags, t_info *info)
+void	put_prec_num(t_flags *flags, t_info *info)
 {
-	char			*s;
-	int				n_len;
-	unsigned int	arg;
+	int		n_len;
+	int		arg;
+	char	*s;
 
-	s = NULL;
-	arg = va_arg(*(info->args), unsigned int);
-	n_len = ft_uns_len(arg, 10);
-	s = ft_utoa(arg);
+	arg = va_arg(*(info->args), int);
+	s = ft_itoa(arg);
+	n_len = ft_num_len(arg, 10);
+	if (arg < 0)
+		n_len--;
 	if (flags->num <= n_len && flags->dot <= n_len)
-		lputunsigned(arg, &(info->p_b));
+			lputnbr(arg, &(info->p_b));
 	else if (flags->num > n_len && n_len > flags->dot)
 		width_greatest(flags, info, arg, s);
 	else if (flags->num < n_len && n_len < flags->dot)
@@ -111,4 +116,12 @@ void	put_prec_uns(t_flags *flags, t_info *info)
 			width_putin(flags, info, arg, s);
 	}
 	free(s);
+}
+
+void	put_dot_case(t_flags *flags, t_info *info, char c)
+{
+	if (c == 'u')
+		put_prec_uns(flags, info);
+	else
+		put_prec_num(flags, info);
 }

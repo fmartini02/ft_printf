@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:56:13 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 17:44:37 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:50:17 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	neg_zero_uns_case(t_flags *flags, t_info *info)
 	int				i;
 
 	u = va_arg(*(info->args), unsigned int);
-	arg = ft_itoa(u);
+	arg = ft_utoa(u, 0);
 	i = 0;
 	while(arg[i])
 		lputchar(arg[i++], &(info->p_b));
@@ -66,11 +66,11 @@ void	neg_zero_exa_case(t_flags *flags, t_info *info, char c)
 	if (c == 'X')
 		base = "0123456789ABCDEF";
 	n = va_arg(*(info->args), int);
-	len = ft_uns_len(n, 16);
+	len = ft_uns_len(n, 16, 0);
 	tmp = malloc(sizeof(char) * (len + 1));
 	if (!tmp)
 		return ;
-	build_num(n, base, tmp);
+	build_num(n, base, tmp, 0);
 	lputstr(tmp, &(info->p_b));
 	while(len++ < flags->num)
 		lputchar('0', &(info->p_b));

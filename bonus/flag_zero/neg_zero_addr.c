@@ -1,52 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zero_addr.c                                        :+:      :+:    :+:   */
+/*   neg_zero_addr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 16:39:24 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 18:45:13 by francema         ###   ########.fr       */
+/*   Created: 2024/12/18 15:21:07 by francema          #+#    #+#             */
+/*   Updated: 2024/12/19 10:49:38 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf_bonus.h"
 
-void	zero_char_case(t_flags *flags, t_info *info)
+void	neg_zero_char_case(t_flags *flags, t_info *info)
 {
 	int	n;
 	int	i;
 
 	n = va_arg(*(info->args), int);
 	i = 0;
+	lputchar(n, &(info->p_b));
 	while (i++ < flags->num)
 		lputchar(' ', &(info->p_b));
-	lputchar(n, &(info->p_b));
 }
 
-void	zero_str_case(t_flags *flags, t_info *info)
+void	neg_zero_str_case(t_flags *flags, t_info *info)
 {
 	char	*arg;
 	int		i;
 
 	i = 0;
 	arg = va_arg(*(info->args), char *);
+	while(arg[i])
+		lputchar(arg[i++], &(info->p_b));
 	while (i++ < flags->num)
 		lputchar(' ', &(info->p_b));
-	lputstr(arg, &(info->p_b));
 }
 
-void	zero_ptr_case(t_flags *flags, t_info *info)
+void	neg_zero_ptr_case(t_flags *flags, t_info *info)
 {
 	void	*ptr;
 	int		nu_len;
 
 	ptr = va_arg(*(info->args), void *);
-	nu_len = ft_uns_len((unsigned long)ptr, 16) + 2;
+	nu_len = ft_uns_len((unsigned long)ptr, 16, 1) + 2;
 	if (!ptr)
 		lputstr("(nil)", &(info->p_b));
+	else
+		ptr_case(ptr, info);
 	while(nu_len++ < flags->num)
 		lputchar(' ', &(info->p_b));
-	if (ptr)
-		ptr_case(ptr, info);
 }
