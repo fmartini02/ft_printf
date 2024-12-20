@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:56:13 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:50:17 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:00:37 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	neg_zero_exa_case(t_flags *flags, t_info *info, char c)
 	lputstr(tmp, &(info->p_b));
 	while(len++ < flags->num)
 		lputchar('0', &(info->p_b));
+	free(tmp);
 }

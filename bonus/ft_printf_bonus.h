@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 16:30:37 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:49:21 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	zero_ptr_case(t_flags *flags, t_info *info);
 void	zero_int_case(t_flags *flags, t_info *info);
 void	zero_uns_case(t_flags *flags, t_info *info);
 void	zero_exa_case(t_flags *flags, t_info *info, char c);
-/*space flag fun*/
+/*space flag funs*/
 void	handle_space(t_info *info, t_flags *flags, char c);
 void	space_char(int c, t_info *info, t_flags *flags);
 void	space_str(char *s, t_info *info, t_flags *flags);
@@ -104,7 +104,21 @@ void	space_adrr(void *p, t_info *info, t_flags *flags);
 void	space_hexa(unsigned int n, t_info *info, t_flags *flags, char c);
 void	space_uns(unsigned int n, t_info *info, t_flags *flags);
 void	space_int(int n, t_info *info, t_flags *flags);
-/*sharp flag fun*/
+/*sharp flag funs*/
 void	handle_sharp(t_info *info, char c, t_flags *flags);
+/*pos flag funs*/
+void	handle_pos(t_flags *flag, t_info *info, char c);
+void	pos_char_case(t_flags *flag, t_info *info);
+void	pos_str_case(t_flags *flag, t_info *info);
+void	pos_ptr_case(t_flags *flags, t_info *info);
+void	pos_int_case(t_flags *flags, t_info *info);
+void	pos_uns_case(t_flags *flags, t_info *info);
+void	pos_hexa_case(t_flags *flags, t_info *info, char c);
+void	neg_pos_char_case(t_flags *flag, t_info *info);
+void	neg_pos_str_case(t_flags *flag, t_info *info);
+void	neg_pos_ptr_case(t_flags *flags, t_info *info);
+void	neg_pos_int_case(t_flags *flags, t_info *info);
+void	neg_pos_hexa_case(t_flags *flags, t_info *info, char c);
+void	neg_pos_uns_case(t_flags *flags, t_info *info);
 
 #endif

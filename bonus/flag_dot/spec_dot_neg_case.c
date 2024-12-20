@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:19:27 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:46:42 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:50:32 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,26 @@ void	dot_neg_str_case(t_flags *flags, t_info *info)
 {
 	char	*s;
 	int		n_width;
+	int		s_len;
+	int		i;
 
 	s = va_arg(*(info->args), char *);
 	n_width = flags->num;
 	if (!s)
 	{
-		if (!flags->num)
-			lputchar('0', &(info->p_b));
+		if (flags->dot >= 6)
+			s = "(null)";
 		else
-		{
-			while (n_width-- > 0)
-				lputchar(' ', &(info->p_b));
-		}
+			s = "";
 	}
-	else
-	{
-		lputstr(s, &(info->p_b));
-		while (n_width-- > (int)ft_strlen(s))
-			lputchar(' ', &(info->p_b));
-	}
+	s_len = ft_strlen(s);
+	i = 0;
+	if (flags->dot < s_len && flags->dot != -1)
+		s_len = flags->dot;
+	while(s[i] && i < flags->dot)
+		lputchar(s[i++], &(info->p_b));
+	while (n_width-- > s_len)
+		lputchar(' ', &(info->p_b));
 }
 
 void	dot_neg_exa_case(t_flags *flags, t_info *info, char c)

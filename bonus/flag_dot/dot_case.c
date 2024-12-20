@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:05:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 12:01:14 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:53:54 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,26 @@ static void	width_putin(t_flags *flags, t_info *info, int arg, char *s)
 {
 	int	n_len;
 	int	i;
+	int	tot_len;
 
 	i = 0;
+	tot_len = flags->num;
 	n_len = ft_num_len(arg, 10);
+	if (arg < 0)
+	{
+		tot_len++;
+		n_len = ft_num_len(arg, 10) - 1;
+	}
 	if (flags->neg)
 	{
+		if (arg < 0)
+		{
+			lputchar('-', &(info->p_b));
+			free(s);
+			arg *= -1;
+			s = ft_itoa(arg);
+			n_len--;
+		}
 		while(n_len + i++ < flags->dot)
 			lputchar('0', &(info->p_b));
 		i = 0;
@@ -78,8 +93,16 @@ static void	width_putin(t_flags *flags, t_info *info, int arg, char *s)
 	}
 	else
 	{
-		while(flags->num > n_len + i++)
+		while(flags->num > (tot_len + i++))//to fix
 			lputchar(' ', &(info->p_b));
+		if (arg < 0)
+		{
+			lputchar('-', &(info->p_b));
+			free(s);
+			arg *= -1;
+			s = ft_itoa(arg);
+			n_len--;
+		}
 		while (n_len++ < flags->dot)
 			lputchar('0', &(info->p_b));
 		i = 0;

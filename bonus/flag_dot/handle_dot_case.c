@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:10:14 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 12:11:43 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:19:11 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	handle_dot(t_flags *flags, t_info *info, char c)
 
 	prec_len = flags->dot;
 	i = 0;
-	if (flags->dot == 0)
-		flags->done = 1;
-	else if (c != 'i' && c != 'd' && c != 'u' )
+	if (c != 'i' && c != 'd' && c != 'u' )
 	{
 		if (flags->neg)
 			spec_dot_neg_case(flags, info, c);

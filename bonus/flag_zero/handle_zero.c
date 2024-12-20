@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:41:10 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 11:09:00 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:13:53 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	neg_zero_case(t_flags *flags, t_info *info, char c)
 		neg_zero_exa_case(flags, info, c);
 	else if (c == 'p')
 		neg_zero_ptr_case(flags, info);
+	else if (c == '%')
+		lputchar('%', &info->p_b);
 }
 
 void	zero_case(t_flags *flags, t_info *info, char c)
@@ -42,6 +44,8 @@ void	zero_case(t_flags *flags, t_info *info, char c)
 		zero_exa_case(flags, info, c);
 	else if (c == 'p')
 		zero_ptr_case(flags, info);
+	else if (c == '%')
+		lputchar('%', &info->p_b);
 }
 
 void	handle_zero(t_flags *flags, t_info *info, char c)

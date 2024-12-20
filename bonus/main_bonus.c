@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 15:44:12 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:13:32 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,21 @@ void	handle_specflag(t_flags *flags, t_info *info)
 	c = s[info->i];//bcs stop before the std flags
 	if (flags->zero && !flags->sharp && flags->num && flags->dot == -1)
 		handle_zero(flags, info, c);
-	if (flags->space && !flags->pos && !flags->neg)
+	else if (flags->space && !flags->pos && !flags->neg)
 		handle_space(info, flags, c);
-	if (flags->sharp && (c == 'x' || c == 'X'))
+	else if (flags->sharp && (c == 'x' || c == 'X'))
 		handle_sharp(info, c, flags);
-	if (flags->dot != -1)
+	else if (flags->dot != -1)
 		handle_dot(flags, info, c);
-	if (flags->num && !flags->done)
+	else if (flags->num && !flags->done)
 	{
 		if (flags->neg)
 			neg_case(info, c, flags);
 		else
 			handle_num(info, c, flags);
 	}
+	else if (flags->pos)
+		handle_pos(flags, info, c);
 	if (!flags->done)
 		expand_flags(info);
 }

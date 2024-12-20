@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:06:58 by francema          #+#    #+#             */
-/*   Updated: 2024/12/18 18:34:25 by francema         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:29:58 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	neg_case(t_info *info, char c, t_flags *flags)
 		num_neg_ptr_case(info,flags);
 	else if (c == 's')
 		num_neg_str_case(info, flags);
+	else
+		return ;
 	flags->done = 1;
 }
 
@@ -69,6 +71,8 @@ void	handle_num(t_info *info, char c, t_flags *flags)
 		num_ptr_case(info, flags);
 	else if (c == 's')
 		num_str_case(info, flags);
+	else
+		return ;
 	flags->done = 1;
 }
 
