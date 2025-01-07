@@ -6,12 +6,11 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:49:44 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 12:29:40 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:57:36 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
-
 
 void	handle_sharp(t_info *info, char c, t_flags *flags)
 {
@@ -28,5 +27,3 @@ void	handle_sharp(t_info *info, char c, t_flags *flags)
 	lputexa(u, info, c);
 	flags->done = 1;
 }
-
-

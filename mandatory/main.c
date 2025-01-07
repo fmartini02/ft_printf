@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/17 17:52:11 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:17:31 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	expand_flags(t_info *info)
 	else if (str[j] == '%')
 		lputchar('%', &(info->p_b));
 }
-
 
 int	ft_printf(const char *str, ...)
 {

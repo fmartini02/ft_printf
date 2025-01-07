@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:06:58 by francema          #+#    #+#             */
-/*   Updated: 2024/12/20 16:29:58 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:59:50 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	neg_case(t_info *info, char c, t_flags *flags)
 	else if (c == 'u')
 		num_neg_uns_case(info, flags);
 	else if (c == 'p')
-		num_neg_ptr_case(info,flags);
+		num_neg_ptr_case(info, flags);
 	else if (c == 's')
 		num_neg_str_case(info, flags);
 	else
@@ -75,4 +75,3 @@ void	handle_num(t_info *info, char c, t_flags *flags)
 		return ;
 	flags->done = 1;
 }
-

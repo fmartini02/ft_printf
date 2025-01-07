@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:11:26 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:48:55 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:39:07 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	num_int_case(t_info *info, t_flags *flags)
 	arg = ft_itoa(n);
 	if (!arg)
 		return ;
-	arg_len = ft_strlen((const char*)arg);
+	arg_len = ft_strlen((const char *) arg);
 	print_width(flags->num, arg_len, info, flags);
 	lputstr(arg, &(info->p_b));
 	free(arg);

@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:13:32 by francema          #+#    #+#             */
-/*   Updated: 2024/12/20 15:51:08 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:11:55 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	pos_ptr_case(t_flags *flags, t_info *info)
 		return ;
 	}
 	ptr_len = ft_uns_len((unsigned long)ptr, 16, 1) + 3;
-	print_width(flags->num - ptr_len, ptr_len , info, flags);
+	print_width(flags->num - ptr_len, ptr_len, info, flags);
 	lputstr("+0x", &(info->p_b));
 	s = malloc(ptr_len - 2);
 	if (!s)

@@ -54,10 +54,8 @@ void	ft_itoa_utils(long long int n, char *res)
 	while (n != 0)
 	{
 		res[len--] = (n % 10) + 48;
-	//	printf("len + 1:%d\n", len + 1);
 		n /= 10;
 	}
-	//printf("res: %s\n", res);
 }
 
 char	*ft_itoa(long long int n)

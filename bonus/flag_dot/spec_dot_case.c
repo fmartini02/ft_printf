@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:27:51 by francema          #+#    #+#             */
-/*   Updated: 2024/12/20 17:55:12 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:04:52 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	dot_str_case(t_flags *flags, t_info *info)
 		s_len = flags->dot;
 	while (n_width-- > s_len)
 		lputchar(' ', &(info->p_b));
-	while(s[i] && i < flags->dot)
+	while (s[i] && i < flags->dot)
 		lputchar(s[i++], &(info->p_b));
 }
 
@@ -58,18 +58,15 @@ void	dot_exa_case(t_flags *flags, t_info *info, char c)
 	char			*s;
 
 	arg = va_arg(*(info->args), int);
+	dot_edge_case(flags, info, arg, c);
+	if (flags->dot == 0 && arg == 0)
+		return ;
 	s = malloc(sizeof(char) * (ft_uns_len(arg, 16, 0) + 1));
 	if (!s)
 		return ;
-	if (c == 'x')
-		build_num(arg, "0123456789abcdef", s, 0);
-	else
-		build_num(arg, "0123456789ABCDEF", s, 0);
+	boh(c, s, arg);
 	if (flags->num > flags->dot && flags->num > (int)ft_strlen(s))
-	{
-		while (flags->num-- > (int)ft_strlen(s))
-			lputchar(' ', &(info->p_b));
-	}
+		exa_dot_width_greatest(flags, info, s);
 	if (flags->dot > (int)ft_strlen(s))
 	{
 		while (flags->dot-- > (int)ft_strlen(s))
@@ -101,7 +98,7 @@ void	dot_ptr_case(t_flags *flags, t_info *info)
 			lputchar('0', &(info->p_b));
 		lputstr(s, &(info->p_b));
 	}
-		lputstr(s, &(info->p_b));
+	lputstr(s, &(info->p_b));
 	free (s);
 }
 

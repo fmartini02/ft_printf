@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2024/12/20 18:13:32 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:58:12 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_specflag(t_flags *flags, t_info *info)
 	char		c;
 
 	s = info->s;
-	c = s[info->i];//bcs stop before the std flags
+	c = s[info->i];
 	if (flags->zero && !flags->sharp && flags->num && flags->dot == -1)
 		handle_zero(flags, info, c);
 	else if (flags->space && !flags->pos && !flags->neg)
@@ -57,9 +57,10 @@ void	spec_flag(t_info *info)
 	flags->neg = 0;
 	flags->pos = 0;
 	flags->sharp = 0;
+	flags->dub = 0;
 	s = info->s;
 	i = info->i;
-	while(check_stdflags(s[i]))
+	while (check_stdflags(s[i]))
 		i = init_flags(s[i], flags, info, &i);
 	info->i = i;
 	handle_specflag(flags, info);
@@ -99,8 +100,8 @@ int	ft_printf(const char *str, ...)
 
 	va_start(args, str);
 	info = malloc(sizeof(t_info));
-	if (!info)
-		return (0);
+	if (!info || !str)
+		return (-1);
 	init_info(info, str, &args);
 	while (info->s[info->i])
 	{
@@ -118,4 +119,3 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (p_b);
 }
-

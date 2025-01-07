@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:48:38 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:49:04 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:59:06 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,3 @@ void	num_ptr_case(t_info *info, t_flags *flags)
 	else
 		ptr_case(ptr, info);
 }
-
-
-

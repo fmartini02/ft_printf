@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:35:41 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:34:11 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:17:13 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ char	*ft_utoa(unsigned long long int n, int cast_type)
 	}
 	return (s);
 }
-

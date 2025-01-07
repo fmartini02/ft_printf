@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:39:24 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:50:26 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:06:01 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	zero_ptr_case(t_flags *flags, t_info *info)
 	nu_len = ft_uns_len((unsigned long)ptr, 16, 1) + 2;
 	if (!ptr)
 		lputstr("(nil)", &(info->p_b));
-	while(nu_len++ < flags->num)
+	while (nu_len++ < flags->num)
 		lputchar(' ', &(info->p_b));
 	if (ptr)
 		ptr_case(ptr, info);

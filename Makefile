@@ -5,9 +5,12 @@ SRC	= main.c \
 	mandatory_utils.c \
 
 SRC_BONUS = main_bonus.c \
-	flag_dot/dot_case.c \
-	flag_dot/handle_dot_case.c \
+	flag_dot/dot_int_case.c \
+	flag_dot/dot_int_neg_case.c \
 	flag_dot/dot_uns_case.c \
+	flag_dot/dot_uns_neg_case.c \
+	flag_dot/dot_utils.c \
+	flag_dot/handle_dot_case.c \
 	flag_dot/spec_dot_case.c \
 	flag_dot/spec_dot_neg_case.c \
 	\

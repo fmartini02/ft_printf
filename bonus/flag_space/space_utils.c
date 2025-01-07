@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:28:33 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 16:19:16 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:09:06 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ void	space_adrr(void *p, t_info *info, t_flags *flags)
 	lputstr("0x", &(info->p_b));
 	print_width(0, 2, info, flags);
 }
-

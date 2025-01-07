@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:27:52 by francema          #+#    #+#             */
-/*   Updated: 2024/12/20 15:54:53 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:10:17 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	pos_int_case(t_flags *flags, t_info *info)
 	}
 	if (flags->dot)
 	{
-		while(flags->dot > n_len++)
+		while (flags->dot > n_len++)
 			lputchar('0', &(info->p_b));
 	}
 	lputnbr(n, &(info->p_b));
@@ -37,7 +37,7 @@ void	pos_int_case(t_flags *flags, t_info *info)
 void	pos_uns_case(t_flags *flags, t_info *info)
 {
 	unsigned int	u;
-	int 			u_len;
+	int				u_len;
 
 	u = va_arg(*(info->args), unsigned int);
 	u_len = ft_uns_len(u, 10, 0) + flags->dot;
@@ -45,7 +45,7 @@ void	pos_uns_case(t_flags *flags, t_info *info)
 	u_len = ft_uns_len(u, 10, 0);
 	if (flags->dot)
 	{
-		while(flags->dot > u_len++)
+		while (flags->dot > u_len++)
 			lputchar('0', &(info->p_b));
 	}
 	lputunsigned(u, &(info->p_b));
@@ -54,7 +54,7 @@ void	pos_uns_case(t_flags *flags, t_info *info)
 void	pos_hexa_case(t_flags *flags, t_info *info, char c)
 {
 	unsigned int	u;
-	int 			u_len;
+	int				u_len;
 	char			*s;
 
 	u = va_arg(*(info->args), unsigned int);
@@ -70,7 +70,7 @@ void	pos_hexa_case(t_flags *flags, t_info *info, char c)
 		build_num(u, "0123456789ABCDEF", s, 0);
 	if (flags->dot)
 	{
-		while(flags->dot > u_len++)
+		while (flags->dot > u_len++)
 			lputchar('0', &(info->p_b));
 	}
 	lputstr(s, &(info->p_b));

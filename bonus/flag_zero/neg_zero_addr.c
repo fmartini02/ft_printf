@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:21:07 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:49:38 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:07:38 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	neg_zero_str_case(t_flags *flags, t_info *info)
 
 	i = 0;
 	arg = va_arg(*(info->args), char *);
-	while(arg[i])
+	while (arg[i])
 		lputchar(arg[i++], &(info->p_b));
 	while (i++ < flags->num)
 		lputchar(' ', &(info->p_b));
@@ -48,6 +48,6 @@ void	neg_zero_ptr_case(t_flags *flags, t_info *info)
 		lputstr("(nil)", &(info->p_b));
 	else
 		ptr_case(ptr, info);
-	while(nu_len++ < flags->num)
+	while (nu_len++ < flags->num)
 		lputchar(' ', &(info->p_b));
 }

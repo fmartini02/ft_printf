@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:16:45 by francema          #+#    #+#             */
-/*   Updated: 2024/12/23 17:32:43 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:02:52 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ static void	width_greatest(t_flags *flags, t_info *info, unsigned int arg)
 	i = 0;
 	width = flags->num;
 	n_len = ft_uns_len(arg, 10, 0);
-	while(width > n_len++)
+	if (arg == 0 && flags->dot == 0)
+		return ;
+	while (width > n_len++)
 		lputchar(' ', &(info->p_b));
 	lputunsigned(arg, &(info->p_b));
 }
 
-static void	prec_greatest(t_info *info, t_flags *flags, int arg)
+static void	prec_greatest(t_info *info, t_flags *flags, unsigned int arg)
 {
 	int	prec;
 	int	n_len;
@@ -40,7 +42,7 @@ static void	prec_greatest(t_info *info, t_flags *flags, int arg)
 		arg *= -1;
 	}
 	n_len = ft_uns_len(arg, 10, 0);
-	while(prec > n_len++)
+	while (prec > n_len++)
 		lputchar('0', &(info->p_b));
 	lputunsigned(arg, &(info->p_b));
 }
@@ -56,7 +58,7 @@ static void	width_putin(t_flags *flags, t_info *info, unsigned int arg)
 		d_len++;
 	if (d_len < flags->num)
 	{
-		while(d_len++ < flags->num)
+		while (d_len++ < flags->num)
 			lputchar(' ', &(info->p_b));
 	}
 	if (arg < 0)
@@ -65,7 +67,7 @@ static void	width_putin(t_flags *flags, t_info *info, unsigned int arg)
 		arg *= -1;
 		n_len = ft_uns_len(arg, 10, 0);
 	}
-	while(n_len++ < flags->dot)
+	while (n_len++ < flags->dot)
 		lputchar('0', &(info->p_b));
 	lputunsigned(arg, &(info->p_b));
 }
@@ -76,9 +78,14 @@ void	put_prec_uns(t_flags *flags, t_info *info)
 	int				n_len;
 
 	arg = va_arg(*(info->args), unsigned int);
+	dot_edge_case(flags, info, arg, 'u');
 	n_len = ft_uns_len(arg, 10, 1);
 	if (flags->num <= n_len && flags->dot <= n_len)
+	{
+		if (arg == 0 && flags->dot == 0)
+			return ;
 		lputunsigned(arg, &(info->p_b));
+	}
 	else if (flags->num > n_len && n_len > flags->dot)
 		width_greatest(flags, info, arg);
 	else if (flags->num < n_len && n_len < flags->dot)

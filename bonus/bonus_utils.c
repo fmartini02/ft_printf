@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:46:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:39:08 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:58:31 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ int	check_stdflags(char c)
 
 int	init_flags(char c, t_flags *flags, t_info *info, int *i)
 {
-	const char	*s;
 	int		j;
 
-	s = info->s;
 	j = *i;
 	if (c == '#')
 		flags->sharp += 1;
@@ -39,13 +37,13 @@ int	init_flags(char c, t_flags *flags, t_info *info, int *i)
 		flags->zero += 1;
 	else if (c >= '1' && c <= '9')
 	{
-		flags->num = ft_atoi(&s[j]);
-		return (ft_skip_num(s, j));
+		flags->num = ft_atoi(&info->s[j]);
+		return (ft_skip_num(info->s, j));
 	}
 	else if (c == '.')
 	{
-		flags->dot = ft_atoi(&s[j + 1]);
-		return (ft_skip_num(s, j + 1));
+		flags->dot = ft_atoi(&info->s[j + 1]);
+		return (ft_skip_num(info->s, j + 1));
 	}
 	else if (c == ' ')
 		flags->space += 1;
@@ -63,7 +61,7 @@ void	ptr_case(void *ptr, t_info *info)
 	lputstr("0x", &(info->p_b));
 	tmp = malloc(sizeof(char) * (nu_len + 1));
 	if (!tmp)
-		return;
+		return ;
 	build_num(nu, "0123456789abcdef", tmp, 1);
 	lputstr(tmp, &(info->p_b));
 	free(tmp);

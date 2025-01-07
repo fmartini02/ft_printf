@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:27:54 by francema          #+#    #+#             */
-/*   Updated: 2024/12/20 15:54:33 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:11:42 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	neg_pos_int_case(t_flags *flags, t_info *info)
 		lputchar('+', &(info->p_b));
 	if (flags->dot)
 	{
-		while(flags->dot > n_len++)
+		while (flags->dot > n_len++)
 			lputchar('0', &(info->p_b));
 	}
 	lputnbr(n, &(info->p_b));
@@ -33,7 +33,7 @@ void	neg_pos_int_case(t_flags *flags, t_info *info)
 void	neg_pos_hexa_case(t_flags *flags, t_info *info, char c)
 {
 	unsigned int	u;
-	int 			u_len;
+	int				u_len;
 	char			*s;
 
 	u = va_arg(*(info->args), unsigned int);
@@ -47,7 +47,7 @@ void	neg_pos_hexa_case(t_flags *flags, t_info *info, char c)
 		build_num(u, "0123456789ABCDEF", s, 0);
 	if (flags->dot)
 	{
-		while(flags->dot > u_len++)
+		while (flags->dot > u_len++)
 			lputchar('0', &(info->p_b));
 	}
 	lputstr(s, &(info->p_b));
@@ -58,7 +58,7 @@ void	neg_pos_hexa_case(t_flags *flags, t_info *info, char c)
 void	neg_pos_uns_case(t_flags *flags, t_info *info)
 {
 	unsigned int	u;
-	int 			u_len;
+	int				u_len;
 	char			*s;
 
 	u = va_arg(*(info->args), unsigned int);
@@ -69,11 +69,10 @@ void	neg_pos_uns_case(t_flags *flags, t_info *info)
 	build_num(u, "0123456789", s, 0);
 	if (flags->dot)
 	{
-		while(flags->dot > u_len++)
+		while (flags->dot > u_len++)
 			lputchar('0', &(info->p_b));
 	}
 	lputstr(s, &(info->p_b));
 	free(s);
 	print_width(flags->num - u_len, u_len, info, flags);
 }
-

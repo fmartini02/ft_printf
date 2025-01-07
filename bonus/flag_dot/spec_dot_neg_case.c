@@ -6,11 +6,11 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:19:27 by francema          #+#    #+#             */
-/*   Updated: 2024/12/20 17:50:32 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:55:59 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../ft_printf_bonus.h"
+#include "../ft_printf_bonus.h"
 
 void	dot_neg_char_case(t_flags *flags, t_info *info)
 {
@@ -44,7 +44,7 @@ void	dot_neg_str_case(t_flags *flags, t_info *info)
 	i = 0;
 	if (flags->dot < s_len && flags->dot != -1)
 		s_len = flags->dot;
-	while(s[i] && i < flags->dot)
+	while (s[i] && i < flags->dot)
 		lputchar(s[i++], &(info->p_b));
 	while (n_width-- > s_len)
 		lputchar(' ', &(info->p_b));
@@ -58,25 +58,25 @@ void	dot_neg_exa_case(t_flags *flags, t_info *info, char c)
 
 	arg = va_arg(*(info->args), int);
 	n_prec = flags->dot;
+	dot_edge_case(flags, info, arg, c);
+	if (arg == 0 && n_prec == 0)
+		return ;
 	s = malloc(sizeof(char) * (ft_uns_len(arg, 16, 0) + 1));
 	if (!s)
 		return ;
-	if (c == 'x')
-		build_num(arg, "0123456789abcdef", s, 0);
-	else
-		build_num(arg, "0123456789ABCDEF", s, 0);
+	boh(c, s, arg);
 	if (n_prec > (int)ft_strlen(s))
 	{
 		while (n_prec-- > (int)ft_strlen(s))
 			lputchar('0', &(info->p_b));
-		lputstr(s, &(info->p_b));
 	}
-	lputstr(s, &(info->p_b));
 	if (flags->num > flags->dot && flags->num > (int)ft_strlen(s))
 	{
-		while (flags->num-- > (int)ft_strlen(s))
-			lputchar(' ', &(info->p_b));
+		lputstr(s, &(info->p_b));
+		exa_dot_width_greatest(flags, info, s);
 	}
+	else
+		lputstr(s, &(info->p_b));
 }
 
 void	dot_neg_ptr_case(t_flags *flags, t_info *info)
