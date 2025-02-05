@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:47:53 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 18:17:31 by francema         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:27:28 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	ft_printf(const char *str, ...)
 
 	va_start(args, str);
 	info = malloc(sizeof(t_info));
-	if (!info)
-		return (0);
+	if (!info || !str)
+		return (-1);
 	init_info(info, str, &args);
 	while (info->s[info->i])
 	{
@@ -64,35 +64,3 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (p_b);
 }
-/*
-int main()
-{
-	//printf("std %c \n", '0');
-	//ft_printf("my %c \n", '0');
-	//printf("std %c\n", '0' - 256);
-	//ft_printf("my %c\n", '0' - 256);
-	//printf("std %c %c %c \n", '0', 0, '1');
-	//ft_printf("my %c %c %c \n", '0', 0, '1');
-	//printf("std_%c_%c_%c_\n", ' ', ' ', ' ');
-	//ft_printf("my_%c_%c_%c_\n", ' ', ' ', ' ');
-	printf("std\t%s\n", ".");
-	ft_printf("my\t%s\n", ".");
-	//printf("printed_b= %d\n", printf("_%u_\n", -1));
-	//printf("printed_b= %d\n", ft_printf("_%u_\n", -1));
-	//printf("p_b= %d\n", printf("_%p_%p_\n", (void *)LONG_MIN,
-	//(void *)LONG_MAX));
-	//printf("p_b= %d\n", ft_printf("_%p_%p_\n",
-	//(void *)LONG_MIN, (void *)LONG_MAX));
-	//printf("_%d_\n", 0);
-	//ft_printf("_%d_\n", 0);
-	//printf("_%d_\n", -10);
-	//ft_printf("_%d_\n", -10);
-	//printf("_%x_\n", -10);
-	//ft_printf("_%x_\n", -10);
-	//printf("_%d_\n", INT_MIN);
-	//ft_printf("_%d_\n", INT_MIN);
-	//printf("%%\n");
-	//ft_printf("%%\n");
-} */
-//printf("%x", -2147483648)
-//printf("%x", 2147483647)
