@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:57:10 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 18:07:13 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:17:17 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ void	zero_int_case(t_flags *flags, t_info *info)
 	long int	n;
 	int			i;
 	char		*arg;
+	int			neg;
 
 	n = va_arg(*(info->args), int);
 	i = 0;
+	neg = 0;
+	if (n < 0)
+		neg = 1;
 	if (n < 0)
 		lputchar('-', &(info->p_b));
 	if (flags->pos)
 		lputchar('+', &(info->p_b));
-	while (i++ < (flags->num - ft_num_len(n, 10)))
+	while (i++ < (flags->num - ft_num_len(n, 10) - neg))
 		lputchar('0', &(info->p_b));
 	if (n < 0)
 		n *= -1;

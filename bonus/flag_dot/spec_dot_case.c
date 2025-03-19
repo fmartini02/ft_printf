@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 10:27:51 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 18:04:52 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/19 14:33:45 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	dot_exa_case(t_flags *flags, t_info *info, char c)
 	s = malloc(sizeof(char) * (ft_uns_len(arg, 16, 0) + 1));
 	if (!s)
 		return ;
-	boh(c, s, arg);
+	build_exa(c, s, arg);
 	if (flags->num > flags->dot && flags->num > (int)ft_strlen(s))
 		exa_dot_width_greatest(flags, info, s);
-	if (flags->dot > (int)ft_strlen(s))
+	while (flags->dot > (int)ft_strlen(s))
 	{
-		while (flags->dot-- > (int)ft_strlen(s))
-			lputchar('0', &(info->p_b));
+		lputchar('0', &(info->p_b));
+		flags->dot--;
 	}
 	lputstr(s, &(info->p_b));
 	free(s);

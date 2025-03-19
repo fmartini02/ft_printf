@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:06:49 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 18:04:07 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:00:13 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	put_prec_uns_neg(t_flags *flags, t_info *info)
 	}
 	else if (flags->num > n_len && n_len > flags->dot)
 		neg_width_greatest(flags, info, arg);
-	else if (flags->num < n_len && n_len < flags->dot)
+	else if (flags->num <= n_len && n_len < flags->dot)
 		neg_prec_greatest(info, flags, arg);
 	else if (n_len < flags->num && n_len < flags->dot)
 		neg_width_putin(flags, info, arg);

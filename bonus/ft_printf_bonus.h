@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:56:49 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 17:57:11 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:42:39 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		ft_printf(const char *str, ...);
 void	expand_flags(t_info *info);
 void	lputchar(char c, int *r);
 void	lputstr(char *s, int *r);
-void	lputnbr(int n, int *p_b);
+void	lputnbr(long int n, int *p_b);
 void	lputunsigned(unsigned int n, int *p_b);
 void	lputexa(unsigned int u, t_info *info, char c);
 void	lputadrr(t_info *info);
@@ -61,9 +61,9 @@ int		init_flags(char c, t_flags *flags, t_info *info, int *i);
 int		check_stdflags(char c);
 void	ptr_case(void *ptr, t_info *info);
 /*dot flag funs*/
-void	put_prec_num_neg(t_flags *flags, t_info *info);
+void	neg_dot_int_case(t_flags *flags, t_info *info);
 void	put_prec_uns_neg(t_flags *flags, t_info *info);
-void	put_prec_num(t_flags *flags, t_info *info);
+void	dot_int_case(t_flags *flags, t_info *info);
 void	put_prec_uns(t_flags *flags, t_info *info);
 void	handle_dot(t_flags *flags, t_info *info, char c);
 void	spec_dot_neg_case(t_flags *flags, t_info *info, char c);
@@ -71,9 +71,9 @@ void	spec_dot_cases(t_flags *flags, t_info *info, char c);
 void	put_dot_case(t_flags *flags, t_info *info, char c);
 void	put_prec_uns(t_flags *flags, t_info *info);
 void	exa_dot_width_greatest(t_flags *flags, t_info *info, char *s);
-void	dot_edge_case(t_flags *flags, t_info *info,
+int		dot_edge_case(t_flags *flags, t_info *info,
 			unsigned long int arg, char c);
-void	boh(char c, char *s, unsigned int arg);
+void	build_exa(char c, char *s, unsigned int arg);
 /*width flag funs*/
 void	neg_case(t_info *info, char c, t_flags *flags);
 void	handle_num(t_info *info, char c, t_flags *flags);

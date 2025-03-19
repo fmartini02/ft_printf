@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:08:01 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:54:57 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:59:07 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 void	num_neg_int_case(t_info *info, t_flags *flags)
 {
-	int		arg_len;
-	int		n;
-	char	*arg;
+	int			arg_len;
+	long int	n;
+	char		*arg;
 
 	n = va_arg(*(info->args), int);
 	arg_len = ft_num_len(n, 10);
+	if (n < 0)
+	{
+		lputchar('-', &(info->p_b));
+		arg_len++;
+		n *= -1;
+	}
 	arg = ft_itoa(n);
 	lputstr(arg, &(info->p_b));
 	print_width(flags->num, arg_len, info, flags);

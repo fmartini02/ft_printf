@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:39:25 by francema          #+#    #+#             */
-/*   Updated: 2024/12/17 17:51:14 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:43:30 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	lputstr(char *s, int *r)
 		lputchar(s[i], r);
 }
 
-void	lputnbr(int n, int *p_b)
+void	lputnbr(long int n, int *p_b)
 {
 	long int	nb;
 

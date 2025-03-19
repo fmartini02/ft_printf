@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:19:27 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 17:55:59 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/19 14:37:31 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,46 @@ void	dot_neg_str_case(t_flags *flags, t_info *info)
 		lputchar(' ', &(info->p_b));
 }
 
+void	neg_exa_utils(t_info *info, t_flags *flags, char *s)
+{
+	int		n_prec;
+
+	n_prec = flags->dot;
+	while (flags->dot > (int)ft_strlen(s))
+	{
+		lputchar('0', &(info->p_b));
+		flags->dot--;
+	}
+	lputstr(s, &(info->p_b));
+	if (flags->num > flags->dot && flags->num > (int)ft_strlen(s))
+		exa_dot_width_greatest(flags, info, s);
+	free(s);
+}
+
 void	dot_neg_exa_case(t_flags *flags, t_info *info, char c)
 {
 	unsigned int	arg;
 	char			*s;
 	int				n_prec;
 
-	arg = va_arg(*(info->args), int);
 	n_prec = flags->dot;
+	arg = va_arg(*(info->args), int);
 	dot_edge_case(flags, info, arg, c);
-	if (arg == 0 && n_prec == 0)
+	if (arg == 0 && flags->dot == 0)
 		return ;
 	s = malloc(sizeof(char) * (ft_uns_len(arg, 16, 0) + 1));
 	if (!s)
 		return ;
-	boh(c, s, arg);
-	if (n_prec > (int)ft_strlen(s))
+	build_exa(c, s, arg);
+	while (n_prec > (int)ft_strlen(s))
 	{
-		while (n_prec-- > (int)ft_strlen(s))
-			lputchar('0', &(info->p_b));
+		lputchar('0', &(info->p_b));
+		n_prec--;
 	}
+	lputstr(s, &(info->p_b));
 	if (flags->num > flags->dot && flags->num > (int)ft_strlen(s))
-	{
-		lputstr(s, &(info->p_b));
 		exa_dot_width_greatest(flags, info, s);
-	}
-	else
-		lputstr(s, &(info->p_b));
+	free(s);
 }
 
 void	dot_neg_ptr_case(t_flags *flags, t_info *info)

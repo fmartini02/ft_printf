@@ -6,27 +6,27 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:10:14 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 12:40:36 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:46:24 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf_bonus.h"
 
-void	put_dot_case(t_flags *flags, t_info *info, char c)
+void	numbers_dot_case(t_flags *flags, t_info *info, char c)
 {
 	if (flags->neg)
 	{
 		if (c == 'u')
 			put_prec_uns_neg(flags, info);
 		else
-			put_prec_num_neg(flags, info);
+			neg_dot_int_case(flags, info);
 	}
 	else
 	{
 		if (c == 'u')
 			put_prec_uns(flags, info);
 		else
-			put_prec_num(flags, info);
+			dot_int_case(flags, info);
 	}
 }
 
@@ -45,6 +45,6 @@ void	handle_dot(t_flags *flags, t_info *info, char c)
 			spec_dot_cases(flags, info, c);
 	}
 	else
-		put_dot_case(flags, info, c);
+		numbers_dot_case(flags, info, c);
 	flags->done = 1;
 }

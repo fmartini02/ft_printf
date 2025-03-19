@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:35:58 by francema          #+#    #+#             */
-/*   Updated: 2024/12/19 10:20:22 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:20:04 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	ft_num_len(long int n, int base)
 	if (n == 0)
 		return (1);
 	if (n < 0)
-	{
 		n *= -1;
-		len++;
-	}
 	while (n > 0)
 	{
 		n /= base;

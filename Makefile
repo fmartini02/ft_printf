@@ -56,8 +56,6 @@ LIBFT = libft/libft.a
 
 FLAGS = -Werror -Wall -Wextra -g
 
-EXE = exe
-
 MAKE := make --no-print-directory
 
 %.o: %.c
@@ -85,13 +83,11 @@ clean:
 	$(MAKE) -C libft clean
 
 fclean:	clean
-	$(RM) $(NAME) $(EXE)
+	$(RM) $(NAME)
 	$(MAKE) -C libft fclean
 
 re:	fclean all
 
-$(EXE):	re
-	$(CC) $(FLAGS) -o exe $(OBJS) $(NAME)
-	$(MAKE) clean
+re_bonus: fclean bonus
 
 .PHONY:	all clean fclean re exe bonus

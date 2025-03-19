@@ -6,7 +6,7 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:16:45 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 18:02:52 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/06 18:47:39 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	put_prec_uns(t_flags *flags, t_info *info)
 	}
 	else if (flags->num > n_len && n_len > flags->dot)
 		width_greatest(flags, info, arg);
-	else if (flags->num < n_len && n_len < flags->dot)
+	else if (flags->num <= n_len && n_len < flags->dot)
 		prec_greatest(info, flags, arg);
 	else if (flags->num > n_len && n_len < flags->dot)
 		width_putin(flags, info, arg);

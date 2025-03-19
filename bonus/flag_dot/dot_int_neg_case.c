@@ -6,92 +6,98 @@
 /*   By: francema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:17:05 by francema          #+#    #+#             */
-/*   Updated: 2025/01/07 17:09:41 by francema         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:36:27 by francema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf_bonus.h"
 
-static void	neg_width_greatest(t_flags *flags, t_info *info, int arg)
+static void	neg_w_n_d(t_flags *flags, t_info *info, int arg)
 {
-	int		i;
-	int		width;
-	int		n_len;
-
-	i = 0;
-	width = flags->num;
-	n_len = ft_num_len(arg, 10);
-	if (arg == 0 && flags->dot == 0)
-		return ;
-	lputnbr(arg, &(info->p_b));
-	while (width > n_len++)
-		lputchar(' ', &(info->p_b));
-}
-
-static void	neg_prec_greatest(t_info *info, t_flags *flags, int arg)
-{
-	int		prec;
-	int		n_len;
-	int		i;
-
-	i = 0;
-	prec = flags->dot;
-	if (arg < 0)
-	{
-		lputchar('-', &(info->p_b));
-		arg *= -1;
-	}
-	n_len = ft_num_len(arg, 10);
-	while (prec > n_len++)
-		lputchar('0', &(info->p_b));
-	lputnbr(arg, &(info->p_b));
-}
-
-static void	neg_width_putin(t_flags *flags, t_info *info, int arg)
-{
-	int	n_len;
 	int	d_len;
-	int	flag;
+	int	w_len;
+	int	n_len;
 
-	n_len = ft_num_len(arg, 10);
 	d_len = flags->dot;
-	flag = 0;
+	w_len = flags->num;
+	n_len = ft_num_len(arg, 10);
 	if (arg < 0)
 	{
 		lputchar('-', &(info->p_b));
 		arg *= -1;
-		n_len--;
-		flag = 1;
+		n_len++;
 	}
-	while (n_len++ < d_len)
-		lputchar('0', &(info->p_b));
 	lputnbr(arg, &(info->p_b));
-	if (flag)
-		d_len++;
-	while (flags->num > d_len++)
+	while (w_len > n_len++)
 		lputchar(' ', &(info->p_b));
 }
 
-void	put_prec_num_neg(t_flags *flags, t_info *info)
+static void	neg_w_d_n(t_flags *flags, t_info *info, int arg)
+{
+	int	d_len;
+	int	w_len;
+	int	n_len;
+	int	tmp;
+
+	d_len = flags->dot;
+	w_len = flags->num;
+	n_len = ft_num_len(arg, 10);
+	tmp = d_len;
+	if (arg < 0)
+	{
+		lputchar('-', &(info->p_b));
+		tmp = d_len + 1;
+		arg *= -1;
+	}
+	while (d_len > n_len++)
+		lputchar('0', &(info->p_b));
+	lputnbr(arg, &(info->p_b));
+	while (w_len > tmp++)
+		lputchar(' ', &(info->p_b));
+}
+
+static void	neg_d_greatest(t_flags *flags, t_info *info, long int arg)
+{
+	int	d_len;
+	int	w_len;
+	int	n_len;
+
+	d_len = flags->dot;
+	w_len = flags->num;
+	n_len = ft_num_len(arg, 10);
+	if (arg < 0)
+	{
+		lputchar('-', &(info->p_b));
+		arg *= -1;
+	}
+	while (d_len > n_len++)
+		lputchar('0', &(info->p_b));
+	lputnbr(arg, &(info->p_b));
+}
+
+void	neg_dot_int_case(t_flags *flags, t_info *info)
 {
 	int	n_len;
 	int	arg;
+	int	d_len;
+	int	w_len;
 
 	arg = va_arg(*(info->args), int);
-	dot_edge_case(flags, info, arg, 'd');
+	if (dot_edge_case(flags, info, arg, 'd'))
+		return ;
 	n_len = ft_num_len(arg, 10);
-	if (arg < 0)
-		n_len--;
-	if (flags->num <= n_len && flags->dot <= n_len)
-	{
-		if (arg == 0 && flags->dot == 0)
-			return ;
+	d_len = flags->dot;
+	w_len = flags->num;
+	if (w_len > n_len && n_len >= d_len)
+		neg_w_n_d(flags, info, arg);
+	else if (w_len > d_len && n_len < d_len)
+		neg_w_d_n(flags, info, arg);
+	else if (n_len >= d_len && d_len >= w_len)
 		lputnbr(arg, &(info->p_b));
-	}
-	else if (flags->num > n_len && n_len > flags->dot)
-		neg_width_greatest(flags, info, arg);
-	else if (flags->num <= n_len && n_len < flags->dot)
-		neg_prec_greatest(info, flags, arg);
-	else if (n_len < flags->num && n_len < flags->dot)
-		neg_width_putin(flags, info, arg);
+	else if (n_len >= w_len && w_len >= d_len)
+		lputnbr(arg, &(info->p_b));
+	else if (d_len >= w_len && w_len >= n_len)
+		neg_d_greatest(flags, info, arg);
+	else if (d_len > n_len && n_len >= w_len)
+		neg_d_greatest(flags, info, arg);
 }
